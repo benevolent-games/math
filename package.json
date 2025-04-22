@@ -16,7 +16,6 @@
 		"test": "exit 0"
 	},
 	"dependencies": {
-		"@e280/stz": "^0.0.0-3",
 		"simplex-noise": "^4.0.3"
 	},
 	"devDependencies": {
