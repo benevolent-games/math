@@ -6,8 +6,8 @@
 
 <br/>
 
-## v0.0
+## v0.1
 
-### v0.0.0
-- 🍏 initial version
+### v0.1.0
+- 🍏 initial cool version
 
