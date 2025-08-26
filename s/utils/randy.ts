@@ -98,19 +98,5 @@ export class Randy {
 		}
 		return array
 	}
-
-	/** @deprecated create an instance with the given seed number. */
-	static seed(seed: number): Randy {
-		return new this(seed)
-	}
-
-	/** @deprecated renamed to `take` */
-	extract<T>(count: number, array: T[]) { return this.take(count, array) }
-
-	/** @deprecated renamed to `range` */
-	between(a: number, b: number) { return this.range(a, b) }
-
-	/** @deprecated renamed to `integerRange` */
-	integerBetween(a: number, b: number) { return this.integerRange(a, b) }
 }
 
