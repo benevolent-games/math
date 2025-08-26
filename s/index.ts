@@ -1,14 +1,10 @@
 
-export * from "./concepts/angles.js"
-export * from "./concepts/circular.js"
-export * from "./concepts/noise.js"
-export * from "./concepts/quat.js"
-export * from "./concepts/randy.js"
-export * from "./concepts/scalar.js"
-export * as spline from "./concepts/spline.js"
-export * from "./concepts/vec2.js"
-export * from "./concepts/vec3.js"
-export * from "./concepts/vec4.js"
+export * from "./primitives/circular.js"
+export * from "./primitives/quat.js"
+export * from "./primitives/scalar.js"
+export * from "./primitives/vec2.js"
+export * from "./primitives/vec3.js"
+export * from "./primitives/vec4.js"
 
 export * from "./optimizers/hash-map.js"
 export * from "./optimizers/hash-set.js"
@@ -22,4 +18,9 @@ export * as shapes2d from "./shapes/2d/index.js"
 
 export * from "./shapes/3d/index.js"
 export * as shapes3d from "./shapes/3d/index.js"
+
+export * from "./utils/angles.js"
+export * from "./utils/noise.js"
+export * from "./utils/randy.js"
+export * as spline from "./utils/spline.js"
 

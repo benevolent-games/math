@@ -1,6 +1,6 @@
 
-import {Scalar} from "./scalar.js"
-import {Vec2Array} from "./vec2.js"
+import {Scalar} from "../primitives/scalar.js"
+import {Vec2Array} from "../primitives/vec2.js"
 
 /** resolve a number within a linear spline. */
 export function linear(x: number, points: Vec2Array[]): number {

@@ -1,7 +1,7 @@
 
-import {Vec2} from "../../concepts/vec2.js"
+import {Vec2} from "../../primitives/vec2.js"
 import {Rect} from "../../shapes/2d/rect.js"
-import {Scalar} from "../../concepts/scalar.js"
+import {Scalar} from "../../primitives/scalar.js"
 import {Circle} from "../../shapes/2d/circle.js"
 
 export function pointVsRect(point: Vec2, box: Rect) {

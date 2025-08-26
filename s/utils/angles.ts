@@ -1,5 +1,5 @@
 
-import {Scalar} from "./scalar.js"
+import {Scalar} from "../primitives/scalar.js"
 
 const pi = Math.PI
 const circle = 2 * Math.PI
