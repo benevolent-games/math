@@ -11,7 +11,9 @@ export * from "./optimizers/hash-set.js"
 export * from "./optimizers/zen.js"
 
 export * from "./physics/2d/collide2d.js"
+export * as collide2d from "./physics/2d/collide2d.js"
 export * from "./physics/2d/intersect2d.js"
+export * as intersect2d from "./physics/2d/intersect2d.js"
 
 export * from "./shapes/2d/index.js"
 export * as shapes2d from "./shapes/2d/index.js"

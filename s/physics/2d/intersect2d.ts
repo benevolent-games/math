@@ -14,7 +14,7 @@ export class Intersection {
 	) {}
 }
 
-export function intersectBoxVsBox(a: Rect, b: Rect) {
+export function intersectRectVsRect(a: Rect, b: Rect) {
 	if (!rectVsRect(a, b)) return null
 
 	const overlapX = Math.min(a.max.x - b.min.x, b.max.x - a.min.x)
