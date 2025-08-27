@@ -53,23 +53,23 @@ export class Scalar {
 		return this
 	}
 
-	static min(x: number, minimum: number = 0) {
-		return Math.max(x, minimum)
-	} min(minimum: number = 0) {
-		this.x = Scalar.min(this.x, minimum)
+	static atLeast(x: number, least: number = 0) {
+		return Math.max(x, least)
+	} atLeast(least: number = 0) {
+		this.x = Scalar.atLeast(this.x, least)
 		return this
 	}
 
-	static max(x: number, maximum: number = 1) {
-		return Math.min(x, maximum)
-	} max(maximum: number = 1) {
-		this.x = Scalar.max(this.x, maximum)
+	static atMost(x: number, most: number = 1) {
+		return Math.min(x, most)
+	} atMost(most: number = 1) {
+		this.x = Scalar.atMost(this.x, most)
 		return this
 	}
 
 	static clamp(x: number, a: number = 0, b: number = 1) {
-		x = Scalar.min(x, Math.min(a, b))
-		x = Scalar.max(x, Math.max(a, b))
+		x = Scalar.atLeast(x, Math.min(a, b))
+		x = Scalar.atMost(x, Math.max(a, b))
 		return x
 	} clamp(a: number = 0, b: number = 1) {
 		this.x = Scalar.clamp(this.x, a, b)
