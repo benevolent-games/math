@@ -43,7 +43,7 @@ export class Scalar {
 			x += n
 		return x
 	} add(...nums: number[]) {
-		this.x = Scalar.add(...nums)
+		this.x = Scalar.add(this.x, ...nums)
 		return this
 	}
 
