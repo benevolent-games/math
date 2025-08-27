@@ -27,6 +27,9 @@ export const Turns = {
 	toRadians(t: number) {
 		return t * Radians.circle
 	},
+	toDegrees(t: number) {
+		return Radians.toDegrees(Turns.toRadians(t))
+	},
 }
 
 export const Arcseconds = {
@@ -38,6 +41,9 @@ export const Arcseconds = {
 export const Degrees = {
 	toRadians(d: number) {
 		return d * (pi / 180)
+	},
+	toTurns(d: number) {
+		return Radians.toTurns(Degrees.toRadians(d))
 	},
 }
 

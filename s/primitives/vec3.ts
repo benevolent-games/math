@@ -180,7 +180,9 @@ export class Vec3 {
 	angleBetween_(x: number, y: number, z: number) {
 		const dotProduct = this.dot_(x, y, z)
 		const magnitudes = this.magnitude() * Vec3.new(x, y, z).magnitude()
-		return Math.acos(dotProduct / magnitudes)
+		if (magnitudes === 0) return 0
+		const ratio = Scalar.clamp(dotProduct / magnitudes, -1, 1)
+		return Math.acos(ratio)
 	}
 
 	angleBetween({x, y, z}: Xyz) {
@@ -226,16 +228,16 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	multiply(...vecs: Vec3[]) {
+	multiply(...vecs: Xyz[]) {
 		for (const {x, y, z} of vecs) this.multiply_(x, y, z)
 		return this
 	}
 
 	/** mutator */
 	divide_(x: number, y: number, z: number) {
-		this.x /= x
-		this.y /= y
-		this.z /= z
+		if (x !== 0) this.x /= x
+		if (y !== 0) this.y /= y
+		if (z !== 0) this.z /= z
 		return this
 	}
 

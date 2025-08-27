@@ -151,7 +151,9 @@ export class Vec2 implements Xy {
 	angleBetween_(x: number, y: number) {
 		const dot = this.dot_(x, y)
 		const magnitudes = this.magnitude() * Vec2.magnitude(x, y)
-		return Math.acos(dot / magnitudes)
+		if (magnitudes === 0) return 0
+		const ratio = Scalar.clamp(dot / magnitudes, -1, 1)
+		return Math.acos(ratio)
 	}
 
 	angleBetween({x, y}: Xy) {
@@ -315,8 +317,8 @@ export class Vec2 implements Xy {
 
 	/** mutator */
 	divide_(x: number, y: number) {
-		this.x /= x
-		this.y /= y
+		if (x !== 0) this.x /= x
+		if (y !== 0) this.y /= y
 		return this
 	}
 

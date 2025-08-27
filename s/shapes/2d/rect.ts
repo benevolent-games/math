@@ -12,7 +12,7 @@ export class Rect {
 	}
 
 	static fromCorner(min: Vec2, extent: Vec2) {
-		return new this(min.add(extent.clone().half()), extent)
+		return new this(min.clone().add(extent.clone().half()), extent)
 	}
 
 	get min() {

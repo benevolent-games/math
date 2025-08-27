@@ -42,5 +42,9 @@ export class HashSet<Value> {
 	values() {
 		return this.#map.values()
 	}
+
+	[Symbol.iterator]() {
+		return this.values()
+	}
 }
 

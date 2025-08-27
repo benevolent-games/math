@@ -9,7 +9,6 @@ export function linear(x: number, points: Vec2Array[]): number {
 
 	const [first] = points.at(0)!
 	const [last] = points.at(-1)!
-
 	x = Scalar.clamp(x, first, last)
 
 	for (let i = 0; i < points.length - 1; i++) {
@@ -30,7 +29,9 @@ export function catmullRom(x: number, points: Vec2Array[]) {
 	if (points.length < 4)
 		throw new Error("need at least four points for this magic")
 
-	x = Scalar.clamp(x)
+	const [first] = points.at(0)!
+	const [last] = points.at(-1)!
+	x = Scalar.clamp(x, first, last)
 
 	// find the segment where 'x' fits
 	for (let i = 1; i < points.length - 2; i++) {

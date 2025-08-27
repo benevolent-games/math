@@ -45,6 +45,10 @@ export class HashMap<Key, Value> {
 		return this.#map.values()
 	}
 
+	[Symbol.iterator]() {
+		return this.entries()
+	}
+
 	*keys() {
 		for (const [key] of this.#map.values())
 			yield key

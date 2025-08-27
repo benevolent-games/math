@@ -38,9 +38,11 @@ export class Segment {
 	}
 
 	scale(fraction: number) {
+		const {center} = this
 		const newHalfVector = this.vector.multiplyBy(fraction / 2)
-		this.start.set(this.center.subtract(newHalfVector))
-		this.end.set(this.center.add(newHalfVector))
+		this.start.set(center.clone().subtract(newHalfVector))
+		this.end.set(center.clone().add(newHalfVector))
+		return this
 	}
 }
 

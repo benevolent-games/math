@@ -9,7 +9,7 @@ export class Zen<X> {
 
 	constructor(
 		public grid: ZenGrid<X>,
-		public box: Rect,
+		public rect: Rect,
 		public item: X,
 	) {}
 
@@ -42,14 +42,14 @@ export class ZenGrid<X> {
 		return n
 	}
 
-	create(box: Rect, item: X) {
-		const zen = new Zen<X>(this, box, item)
+	create(rect: Rect, item: X) {
+		const zen = new Zen<X>(this, rect, item)
 		this.update(zen)
 		return zen
 	}
 
 	update(zen: Zen<X>) {
-		const wantedZones = this.#selectZones(zen.box)
+		const wantedZones = this.#selectZones(zen.rect)
 
 		// delete stale zones
 		for (const zone of zen.zones) {
@@ -81,38 +81,38 @@ export class ZenGrid<X> {
 			this.#zones.delete(emptyZone.hash)
 	}
 
-	check(box: Rect) {
-		const zones = this.#selectZones(box)
+	check(rect: Rect) {
+		const zones = this.#selectZones(rect)
 
 		for (const zone of zones)
 			for (const zen of zone.zens)
-				if (rectVsRect(box, zen.box))
+				if (rectVsRect(rect, zen.rect))
 					return true
 
 		return false
 	}
 
-	/** return all zens that touch the given box */
-	query(box: Rect) {
-		const zones = this.#selectZones(box)
-		const selected: Zen<X>[] = []
+	/** return set of zens that touch the given rect */
+	query(rect: Rect) {
+		const zones = this.#selectZones(rect)
+		const selected = new Set<Zen<X>>()
 
 		for (const zone of zones)
 			for (const zen of zone.zens)
-				if (rectVsRect(box, zen.box) && !selected.includes(zen))
-					selected.push(zen)
+				if (!selected.has(zen) && rectVsRect(rect, zen.rect))
+					selected.add(zen)
 
 		return selected
 	}
 
-	/** return all zen items that touch the given box */
-	queryItems(box: Rect) {
-		return this.query(box).map(zen => zen.item)
+	/** return all zen items that touch the given rect */
+	queryItems(rect: Rect) {
+		return [...this.query(rect)].map(zen => zen.item)
 	}
 
-	/** return all zen boxes that touch the given box */
-	queryBoxes(box: Rect) {
-		return this.query(box).map(zen => zen.box)
+	/** return all zen rects that touch the given rect */
+	queryRects(rect: Rect) {
+		return [...this.query(rect)].map(zen => zen.rect)
 	}
 
 	#hash(v: Vec2) {
@@ -135,10 +135,10 @@ export class ZenGrid<X> {
 		))
 	}
 
-	#selectZones(box: Rect) {
+	#selectZones(rect: Rect) {
 		const zones = new Set<ZenZone<X>>()
-		const minZoneCorner = this.#calculateZoneCorner(box.min)
-		const maxZoneCorner = this.#calculateZoneCorner(box.max)
+		const minZoneCorner = this.#calculateZoneCorner(rect.min)
+		const maxZoneCorner = this.#calculateZoneCorner(rect.max)
 
 		for (let x = minZoneCorner.x; x <= maxZoneCorner.x; x += this.zoneExtent.x)
 			for (let y = minZoneCorner.y; y <= maxZoneCorner.y; y += this.zoneExtent.y)
