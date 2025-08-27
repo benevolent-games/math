@@ -55,14 +55,14 @@ export class Vec2 implements Xy {
 			.divideBy(vectors.length)
 	}
 
-	static min(...vecs: Vec2[]) {
+	static min(...vecs: Xy[]) {
 		return new Vec2(
 			Math.min(...vecs.map(v => v.x)),
 			Math.min(...vecs.map(v => v.y)),
 		)
 	}
 
-	static max(...vecs: Vec2[]) {
+	static max(...vecs: Xy[]) {
 		return new Vec2(
 			Math.max(...vecs.map(v => v.x)),
 			Math.max(...vecs.map(v => v.y)),
@@ -375,7 +375,7 @@ export class Vec2 implements Xy {
 	}
 
 	/** mutator */
-	rotateAroundPoint({x, y}: Vec2, radians: number) {
+	rotateAroundPoint({x, y}: Xy, radians: number) {
 		return this.rotateAroundPoint_(x, y, radians)
 	}
 
