@@ -4,10 +4,11 @@
 
 <br/>
 
-## 🍋 PRIMITIVES
-> core numerical concepts we use everywhere
+## 🍋 CORE
+> common numerical structures
 
-- **mutable by default**  
+### 🍏 conventions for all core classes
+- **mutable by default.**  
     operations happen in-place, for efficiency (we're trying to reduce gc churn).  
     ```ts
     // allocate a single vector instance
@@ -15,7 +16,7 @@
       .add({x: 1, y: 2})
       .multiplyBy(2)
     ```
-- **explicit cloning**  
+- **explicit cloning.**  
     use `.clone()` to avoid mutating the original.  
     ```ts
     // modify a clone (not the original)
@@ -23,7 +24,7 @@
       .clone()
       .normalize()
     ```
-- **static vs instance methods**  
+- **static vs instance methods.**  
   many primitive methods are available as static methods or instance methods.  
   - *static:*
       ```ts
@@ -33,7 +34,7 @@
       ```ts
       const sum = vectorA.clone().add(vectorB, vectorC)
       ```
-- **underscore-suffixed methods take direct args**  
+- **underscore-suffixed methods take direct args.**  
   - methods normally take in other class instances:
       ```ts
       vectorA.add(vectorB)
@@ -43,12 +44,28 @@
       vectorA.add_(x, y)
       ```
 
-### 🍏 Scalar
 ### 🍏 Vec2
 ### 🍏 Vec3
 ### 🍏 Vec4
 ### 🍏 Quat
+
+<br/>
+
+## 🍋 HELPERS
+> handy utilities
+
+### 🍏 Scalar
 ### 🍏 Circular
+
+### 🍏 Angles
+- **Radians**
+- **Degrees**
+- **Turns**
+- **Arcseconds**
+
+### 🍏 Randy
+### 🍏 Noise
+### 🍏 Spline
 
 <br/>
 
@@ -66,21 +83,6 @@
 - **Capsule** — a fat line segment (like a hoagie)
 - **Box** — a cuboid
 - **Sphere** — a point with a radius
-
-<br/>
-
-## 🍋 UTILS
-> interesting utilities
-
-### 🍏 Angles
-- **Radians**
-- **Degrees**
-- **Turns**
-- **Arcseconds**
-
-### 🍏 Randy
-### 🍏 Noise
-### 🍏 Spline
 
 <br/>
 

@@ -1,5 +1,5 @@
 
-import {Vec3} from "../../primitives/vec3.js"
+import {Vec3} from "../../core/vec3.js"
 
 export class Segment {
 	constructor(

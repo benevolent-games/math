@@ -1,5 +1,5 @@
 
-import {Vec2} from "../../primitives/vec2.js"
+import {Vec2} from "../../core/vec2.js"
 import {pointVsRect} from "../../physics/2d/collide2d.js"
 
 export class Rect {

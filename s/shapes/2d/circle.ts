@@ -1,6 +1,6 @@
 
 import {Rect} from "./rect.js"
-import {Vec2} from "../../primitives/vec2.js"
+import {Vec2} from "../../core/vec2.js"
 
 export class Circle {
 	constructor(

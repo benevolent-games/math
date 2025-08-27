@@ -1,7 +1,7 @@
 
 import {MapG} from "@e280/stz"
 import {Rect} from "../shapes/2d/rect.js"
-import {Vec2} from "../primitives/vec2.js"
+import {Vec2} from "../core/vec2.js"
 import {rectVsRect} from "../physics/2d/collide2d.js"
 
 export class Zen<X> {

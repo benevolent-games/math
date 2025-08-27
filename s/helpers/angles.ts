@@ -1,5 +1,5 @@
 
-import {Scalar} from "../primitives/scalar.js"
+import {Scalar} from "./scalar.js"
 
 const pi = Math.PI
 
