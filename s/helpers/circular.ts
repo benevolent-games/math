@@ -1,6 +1,8 @@
 
 import {Scalar} from "./scalar.js"
 
+const circle = 2 * Math.PI
+
 export class Circular {
 	constructor(public x: number) {}
 
@@ -20,7 +22,7 @@ export class Circular {
 	}
 
 	static normalize(x: number) {
-		return Scalar.wrap(x, 0, 2 * Math.PI)
+		return Scalar.wrap(x, 0, circle)
 	} normalize() {
 		this.x = Circular.normalize(this.x)
 		return this
@@ -30,8 +32,8 @@ export class Circular {
 		x = this.normalize(x)
 		y = this.normalize(y)
 		let delta = y - x
-		if (delta > Math.PI) delta -= 2 * Math.PI
-		if (delta < -Math.PI) delta += 2 * Math.PI
+		if (delta > Math.PI) delta -= circle
+		if (delta < -Math.PI) delta += circle
 		return delta
 	} difference(y: number | Circular) {
 		return Circular.difference(this.x, Circular.value(y))
