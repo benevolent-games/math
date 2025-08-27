@@ -1,5 +1,5 @@
 
-import {Scalar} from "../helpers/scalar.js"
+import {Scalar} from "../tools/scalar.js"
 
 export type Vec2Array = [number, number]
 export type Xy = {x: number, y: number}

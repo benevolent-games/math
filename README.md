@@ -44,11 +44,11 @@
 
 <br/>
 
-## 🍋 HELPERS
+## 🍋 TOOLS
 > handy utilities
 
 > [!TIP]
-> until real docs are written, see the relevant sourcecode in [s/helpers/](./s/helpers/)
+> until real docs are written, see the relevant sourcecode in [s/tools/](./s/tools/)
 
 ### 🍏 Scalar
 ### 🍏 Circular
