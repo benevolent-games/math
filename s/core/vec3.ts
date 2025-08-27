@@ -72,7 +72,7 @@ export class Vec3 {
 		)
 	}
 
-	static hexColor(hex: string): Vec3 {
+	static fromHex(hex: string): Vec3 {
 		if (hex.startsWith("#") && hex.length === 7) {
 			const r = parseInt(hex.slice(1, 3), 16) / 255
 			const g = parseInt(hex.slice(3, 5), 16) / 255
@@ -121,7 +121,7 @@ export class Vec3 {
 		return Vec3.magnitude(this.x, this.y, this.z)
 	}
 
-	hexColor() {
+	toHex() {
 		const to255 = (val: number) => Math.round(val * 255)
 		const toHex = (val: number) => to255(val).toString(16).padStart(2, '0')
 		return `#${toHex(this.x)}${toHex(this.y)}${toHex(this.z)}`
