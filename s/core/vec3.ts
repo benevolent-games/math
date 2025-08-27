@@ -121,8 +121,9 @@ export class Vec3 {
 		return Vec3.magnitude(this.x, this.y, this.z)
 	}
 
+	/** rgb values from 0-1 */
 	toHex() {
-		const to255 = (val: number) => Math.round(val * 255)
+		const to255 = (val: number) => Math.round(Scalar.clamp(val * 255, 0, 255))
 		const toHex = (val: number) => to255(val).toString(16).padStart(2, '0')
 		return `#${toHex(this.x)}${toHex(this.y)}${toHex(this.z)}`
 	}
