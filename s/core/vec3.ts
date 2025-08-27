@@ -179,7 +179,7 @@ export class Vec3 {
 
 	angleBetween_(x: number, y: number, z: number) {
 		const dotProduct = this.dot_(x, y, z)
-		const magnitudes = this.magnitude() * Vec3.new(x, y, z).magnitude()
+		const magnitudes = this.magnitude() * Vec3.magnitude(x, y, z)
 		if (magnitudes === 0) return 0
 		const ratio = Scalar.clamp(dotProduct / magnitudes, -1, 1)
 		return Math.acos(ratio)
