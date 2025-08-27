@@ -22,7 +22,6 @@ export * as intersect2d from "./physics/2d/intersect2d.js"
 
 export * from "./shapes/2d/index.js"
 export * as shapes2d from "./shapes/2d/index.js"
-
 export * from "./shapes/3d/index.js"
 export * as shapes3d from "./shapes/3d/index.js"
 

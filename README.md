@@ -7,6 +7,9 @@
 ## 🍋 CORE
 > common numerical structures
 
+> [!TIP]
+> until real docs are written, see the relevant sourcecode in [s/core/](./s/core/)
+
 ### 🍏 conventions for all core classes
 - **mutable by default.**  
     operations happen in-place, for efficiency (we're trying to reduce gc churn).  
@@ -24,16 +27,6 @@
       .clone()
       .normalize()
     ```
-- **static vs instance methods.**  
-  many primitive methods are available as static methods or instance methods.  
-  - *static:*
-      ```ts
-      const sum = Vec2.add(vectorA, vectorB, vectorC)
-      ```
-  - *instance:*
-      ```ts
-      const sum = vectorA.clone().add(vectorB, vectorC)
-      ```
 - **underscore-suffixed methods take direct args.**  
   - methods normally take in other class instances:
       ```ts
@@ -54,23 +47,27 @@
 ## 🍋 HELPERS
 > handy utilities
 
+> [!TIP]
+> until real docs are written, see the relevant sourcecode in [s/helpers/](./s/helpers/)
+
 ### 🍏 Scalar
 ### 🍏 Circular
-
+### 🍏 Randy
+### 🍏 Noise
+### 🍏 Spline
 ### 🍏 Angles
 - **Radians**
 - **Degrees**
 - **Turns**
 - **Arcseconds**
 
-### 🍏 Randy
-### 🍏 Noise
-### 🍏 Spline
-
 <br/>
 
 ## 🍋 SHAPES
 > geometric concepts
+
+> [!TIP]
+> until real docs are written, see the relevant sourcecode in [s/shapes/](./s/shapes/)
 
 ### 🍏 2d shapes
 - **Edge** — a line segment
@@ -89,6 +86,9 @@
 ## 🍋 OPTIMIZERS
 > spatial optimization data structures
 
+> [!TIP]
+> until real docs are written, see the relevant sourcecode in [s/optimizers/](./s/optimizers/)
+
 ### 🍏 HashMap
 ### 🍏 HashSet
 ### 🍏 ZenGrid
@@ -97,6 +97,9 @@
 
 ## 🍋 PHYSICS
 > functionality for doing basic physics
+
+> [!TIP]
+> until real docs are written, see the relevant sourcecode in [s/physics/](./s/physics/)
 
 ### 🍏 collide2d
 ### 🍏 collide3d
