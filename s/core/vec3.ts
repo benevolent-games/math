@@ -56,7 +56,7 @@ export class Vec3 {
 			.divideBy(vecs.length)
 	}
 
-	static min(...vecs: Vec3[]) {
+	static min(...vecs: Xyz[]) {
 		return new Vec3(
 			Math.min(...vecs.map(v => v.x)),
 			Math.min(...vecs.map(v => v.y)),
@@ -64,7 +64,7 @@ export class Vec3 {
 		)
 	}
 
-	static max(...vecs: Vec3[]) {
+	static max(...vecs: Xyz[]) {
 		return new Vec3(
 			Math.max(...vecs.map(v => v.x)),
 			Math.max(...vecs.map(v => v.y)),
@@ -242,7 +242,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	divide(...vecs: Vec3[]) {
+	divide(...vecs: Xyz[]) {
 		for (const {x, y, z} of vecs) this.divide_(x, y, z)
 		return this
 	}
@@ -391,7 +391,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	projectOnto({x, y, z}: Vec3) {
+	projectOnto({x, y, z}: Xyz) {
 		return this.projectOnto_(x, y, z)
 	}
 
