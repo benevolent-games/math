@@ -243,7 +243,9 @@ export class Vec2 implements Xy {
 
 	/** mutator */
 	clampBy(min: number, max: number) {
-		return this.map(v => Math.max(min, Math.min(max, v)))
+		this.x = Scalar.clamp(this.x, min, max)
+		this.y = Scalar.clamp(this.y, min, max)
+		return this
 	}
 
 	/** mutator */
