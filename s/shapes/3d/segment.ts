@@ -7,18 +7,18 @@ export class Segment {
 		public end: Vec3,
 	) {}
 
-	get vector() {
+	vector() {
 		return this.end.clone().subtract(this.start)
 	}
 
-	get length() {
+	length() {
 		return this.start.distance(this.end)
 	}
 
-	get center() {
+	center() {
 		return this.start.clone()
 			.add(this.end)
-			.divideBy(2)
+			.half()
 	}
 
 	clone() {
@@ -29,19 +29,19 @@ export class Segment {
 	}
 
 	fromStart(length: number) {
-		const direction = this.vector.normalize()
+		const direction = this.vector().normalize()
 		return this.start.clone().add(direction.multiplyBy(length))
 	}
 
 	point(fraction: number) {
-		return this.start.clone().add(this.vector.multiplyBy(fraction))
+		return this.start.clone().add(this.vector().multiplyBy(fraction))
 	}
 
 	scale(fraction: number) {
 		const {center} = this
-		const newHalfVector = this.vector.multiplyBy(fraction / 2)
-		this.start.set(center.clone().subtract(newHalfVector))
-		this.end.set(center.clone().add(newHalfVector))
+		const newHalfVector = this.vector().multiplyBy(fraction / 2)
+		this.start.set(center().subtract(newHalfVector))
+		this.end.set(center().add(newHalfVector))
 		return this
 	}
 }

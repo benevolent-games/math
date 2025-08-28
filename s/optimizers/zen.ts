@@ -22,11 +22,12 @@ export class Zen<X> {
 	}
 }
 
-export class ZenZone<X> extends Rect {
+export class ZenZone<X> {
+	rect: Rect
 	zens = new Set<Zen<X>>()
 
-	constructor(public hash: string, center: Vec2, extent: Vec2) {
-		super(center, extent)
+	constructor(public hash: string, center: Vec2, size: Vec2) {
+		this.rect = Rect.fromCenter(center, size)
 	}
 }
 

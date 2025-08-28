@@ -86,7 +86,13 @@ export class Quat {
 	}
 
 	invert() {
-		return this.conjugate().normalize()
+		const len2 = this.lengthSquared()
+		if (!len2) return this.set_(0, 0, 0, 1)
+		this.x = -this.x / len2
+		this.y = -this.y / len2
+		this.z = -this.z / len2
+		this.w = this.w / len2
+		return this
 	}
 
 	transform_(x: number, y: number, z: number, w: number, global = false) {

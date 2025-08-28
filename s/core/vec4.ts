@@ -31,6 +31,7 @@ export class Vec4 {
 		yield this.x
 		yield this.y
 		yield this.z
+		yield this.w
 	}
 
 	toJSON(): XyzwArray {

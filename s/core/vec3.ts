@@ -389,7 +389,9 @@ export class Vec3 {
 
 	/** mutator */
 	projectOnto_(x: number, y: number, z: number) {
-		const scalar = this.dot_(x, y, z) / Vec3.magnitudeSquared(x, y, z)
+		const m2 = Vec3.magnitudeSquared(x, y, z)
+		if (!m2) return this
+		const scalar = this.dot_(x, y, z) / m2
 		this.x = scalar * x
 		this.y = scalar * y
 		this.z = scalar * z
