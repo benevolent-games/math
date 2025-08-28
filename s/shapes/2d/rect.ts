@@ -1,36 +1,60 @@
 
-import {Vec2} from "../../core/vec2.js"
+import {Vec2, Vec2Array, Xy} from "../../core/vec2.js"
 import {pointVsRect} from "../../physics/2d/collide2d.js"
+
+export type RectJson = [min: Vec2Array, max: Vec2Array]
+export type RectLike = {min: Xy, max: Xy}
 
 export class Rect {
 	constructor(
-			public center: Vec2,
-			public extent: Vec2,
-		) {
-		if (extent.x < 0 || extent.y < 0)
-			throw new Error(`invalid negative extent, ${extent.toString()}`)
+		public min: Vec2,
+		public max: Vec2,
+	) {}
+
+	static from(data: RectJson | RectLike) {
+		return Array.isArray(data)
+			? new this(Vec2.array(data[0]), Vec2.array(data[1]))
+			: new this(Vec2.import(data.min), Vec2.import(data.max))
 	}
 
-	static fromCorner(min: Vec2, extent: Vec2) {
-		return new this(min.clone().add(extent.clone().half()), extent)
+	static fromCorner(min: Vec2, size: Vec2) {
+		const max = min.clone().add(size)
+		return new this(min, max)
 	}
 
-	get min() {
-		return this.center.clone()
-			.subtract(this.extent.clone().half())
+	static fromCenter(center: Vec2, size: Vec2) {
+		const halfSize = size.clone().half()
+		const min = center.clone().subtract(halfSize)
+		const max = center.clone().add(halfSize)
+		return new this(min, max)
 	}
 
-	get max() {
-		return this.center.clone()
-			.add(this.extent.clone().half())
+	clone() {
+		return new Rect(this.min.clone(), this.max.clone())
 	}
 
-	offset(delta: Vec2) {
-		this.center.add(delta)
+	toJSON(): RectJson {
+		return [this.min.array(), this.max.array()]
+	}
+
+	normalize() {
+		const {min, max} = this
+		this.min.set(Vec2.min(min, max))
+		this.max.set(Vec2.max(min, max))
 		return this
 	}
 
-	boundingBox() {
+	size() {
+		return this.max.clone().subtract(this.min)
+	}
+
+	center() {
+		return this.min.clone().add(this.size().half())
+	}
+
+	translate(delta: Vec2) {
+		this.min.add(delta)
+		this.max.add(delta)
 		return this
 	}
 
@@ -38,8 +62,8 @@ export class Rect {
 		return pointVsRect(point, this)
 	}
 
-	clone() {
-		return new Rect(this.center.clone(), this.extent.clone())
+	boundingBox() {
+		return this.clone()
 	}
 }
 

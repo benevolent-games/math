@@ -290,6 +290,14 @@ export class Vec3 {
 	}
 
 	/** mutator */
+	subtractBy(delta: number) {
+		this.x -= delta
+		this.y -= delta
+		this.z -= delta
+		return this
+	}
+
+	/** mutator */
 	multiplyBy(delta: number) {
 		this.x *= delta
 		this.y *= delta

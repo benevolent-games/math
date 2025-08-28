@@ -21,14 +21,17 @@ export function intersectRectVsRect(a: Rect, b: Rect) {
 	const overlapY = Math.min(a.max.y - b.min.y, b.max.y - a.min.y)
 	const depth = Math.min(overlapX, overlapY)
 
+	const aCenter = a.center()
+	const bCenter = b.center()
+
 	const contactPoint = new Vec2(
-		Scalar.clamp((a.center.x + b.center.x) / 2, b.min.x, b.max.x),
-		Scalar.clamp((a.center.y + b.center.y) / 2, b.min.y, b.max.y)
+		Scalar.clamp((aCenter.x + bCenter.x) / 2, b.min.x, b.max.x),
+		Scalar.clamp((aCenter.y + bCenter.y) / 2, b.min.y, b.max.y)
 	)
 
 	const normalA = depth === overlapX
-		? new Vec2(b.center.x > a.center.x ? -1 : 1, 0)
-		: new Vec2(0, b.center.y > a.center.y ? -1 : 1)
+		? new Vec2(bCenter.x > aCenter.x ? -1 : 1, 0)
+		: new Vec2(0, bCenter.y > aCenter.y ? -1 : 1)
 
 	const normalB = normalA.clone().multiplyBy(-1)
 

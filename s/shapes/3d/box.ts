@@ -1,38 +1,78 @@
 
-import {Vec3} from "../../core/vec3.js"
+import {Vec3, Vec3Array, Xyz} from "../../core/vec3.js"
+
+export type BoxJson = [min: Vec3Array, max: Vec3Array]
+export type BoxLike = {min: Xyz, max: Xyz}
 
 export class Box {
 	constructor(
-			public center: Vec3,
-			public extent: Vec3,
-		) {
-		if (extent.x < 0 || extent.y < 0 || extent.z < 0)
-			throw new Error(`invalid negative extent, ${extent.toString()}`)
+		public min: Vec3,
+		public max: Vec3,
+	) {}
+
+	static from(data: BoxJson | BoxLike) {
+		return Array.isArray(data)
+			? new this(Vec3.from(data[0]), Vec3.from(data[1]))
+			: new this(Vec3.from(data.min), Vec3.from(data.max))
 	}
 
-	static fromCorner(min: Vec3, extent: Vec3) {
-		return new this(
-			min.clone().add(extent.clone().half()),
-			extent,
-		)
+	static fromCorner(min: Vec3, size: Vec3) {
+		return new this(min, min.clone().add(size))
 	}
 
-	get min() {
-		return this.center.clone()
-			.subtract(this.extent.clone().half())
+	static fromCenter(center: Vec3, size: Vec3) {
+		const halfSize = size.clone().half()
+		const min = center.clone().subtract(halfSize)
+		const max = center.clone().add(halfSize)
+		return new this(min, max)
 	}
 
-	get max() {
-		return this.center.clone()
-			.add(this.extent.clone().half())
+	toJSON(): BoxJson {
+		return [this.min.array(), this.max.array()]
 	}
 
 	clone() {
-		return new Box(this.center.clone(), this.extent.clone())
+		return new Box(this.min.clone(), this.max.clone())
 	}
 
-	grow(increase: number) {
-		this.extent.addBy(increase)
+	size() {
+		return this.max.clone().subtract(this.min)
+	}
+
+	center() {
+		return this.min.clone().add(this.size().half())
+	}
+
+	normalize() {
+		const {min, max} = this
+		this.min.set(Vec3.min(min, max))
+		this.max.set(Vec3.max(min, max))
+		return this
+	}
+
+	translate_(x: number, y: number, z: number) {
+		this.min.add_(x, y, z)
+		this.max.add_(x, y, z)
+		return this
+	}
+
+	translate(delta: Vec3) {
+		this.min.add(delta)
+		this.max.add(delta)
+		return this
+	}
+
+	grow(increase: Vec3) {
+		const halfIncrease = increase.clone().half()
+		this.min.subtract(halfIncrease)
+		this.max.add(halfIncrease)
+		return this
+	}
+
+	growBy(increase: number) {
+		const halfIncrease = increase / 2
+		this.min.subtractBy(halfIncrease)
+		this.max.addBy(halfIncrease)
 		return this
 	}
 }
