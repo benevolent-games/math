@@ -1,9 +1,9 @@
 
 import {Scalar} from "./scalar.js"
-import {Vec2Array} from "../core/vec2.js"
+import {Vec2Json} from "../core/vec2.js"
 
 /** resolve a number within a linear spline. */
-export function linear(x: number, points: Vec2Array[]): number {
+export function linear(x: number, points: Vec2Json[]): number {
 	if (points.length < 2)
 		throw new Error("need at least two points, come on")
 
@@ -25,7 +25,7 @@ export function linear(x: number, points: Vec2Array[]): number {
 }
 
 /** resolve a number within a catmull-rom spline, that's all smooth-like. */
-export function catmullRom(x: number, points: Vec2Array[]) {
+export function catmullRom(x: number, points: Vec2Json[]) {
 	if (points.length < 4)
 		throw new Error("need at least four points for this magic")
 
@@ -55,7 +55,7 @@ export const ez = {
 			throw new Error("need at least two points, come on")
 
 		const points2 = points.map(
-			(p, index): Vec2Array =>
+			(p, index): Vec2Json =>
 				[Scalar.clamp(index / (points.length - 1)), p]
 		)
 
@@ -68,10 +68,10 @@ namespace helpers {
 	/** internal big-brain maths for the catmull-rom implementation */
 	export function catmullRom(
 			t: number,
-			[,p0]: Vec2Array,
-			[,p1]: Vec2Array,
-			[,p2]: Vec2Array,
-			[,p3]: Vec2Array,
+			[,p0]: Vec2Json,
+			[,p1]: Vec2Json,
+			[,p2]: Vec2Json,
+			[,p3]: Vec2Json,
 		) {
 
 		const t2 = t * t

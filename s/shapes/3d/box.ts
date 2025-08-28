@@ -35,6 +35,11 @@ export class Box {
 		return new Box(this.min.clone(), this.max.clone())
 	}
 
+	set(box: BoxLike) {
+		this.min.set(box.min)
+		this.max.set(box.max)
+	}
+
 	size() {
 		return this.max.clone().subtract(this.min)
 	}

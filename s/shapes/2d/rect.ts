@@ -1,8 +1,8 @@
 
-import {Vec2, Vec2Array, Xy} from "../../core/vec2.js"
+import {Vec2, Vec2Json, Xy} from "../../core/vec2.js"
 import {pointVsRect} from "../../physics/2d/collide2d.js"
 
-export type RectJson = [min: Vec2Array, max: Vec2Array]
+export type RectJson = [min: Vec2Json, max: Vec2Json]
 export type RectLike = {min: Xy, max: Xy}
 
 export class Rect {
@@ -13,8 +13,8 @@ export class Rect {
 
 	static from(data: RectJson | RectLike) {
 		return Array.isArray(data)
-			? new this(Vec2.array(data[0]), Vec2.array(data[1]))
-			: new this(Vec2.import(data.min), Vec2.import(data.max))
+			? new this(Vec2.from(data[0]), Vec2.from(data[1]))
+			: new this(Vec2.from(data.min), Vec2.from(data.max))
 	}
 
 	static fromCorner(min: Vec2, size: Vec2) {
@@ -34,7 +34,12 @@ export class Rect {
 	}
 
 	toJSON(): RectJson {
-		return [this.min.array(), this.max.array()]
+		return [this.min.toJSON(), this.max.toJSON()]
+	}
+
+	set(rect: RectLike) {
+		this.min.set(rect.min)
+		this.max.set(rect.max)
 	}
 
 	normalize() {

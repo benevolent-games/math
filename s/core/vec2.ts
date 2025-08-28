@@ -1,11 +1,8 @@
 
 import {Scalar} from "../tools/scalar.js"
 
-export type Vec2Array = [number, number]
+export type Vec2Json = [x: number, y: number]
 export type Xy = {x: number, y: number}
-
-/** https://github.com/microsoft/TypeScript/issues/5863 */
-type TsHack<T> = {new(...a: ConstructorParameters<typeof Vec2>): T}
 
 export class Vec2 implements Xy {
 	constructor(
@@ -13,32 +10,22 @@ export class Vec2 implements Xy {
 		public y: number,
 	) {}
 
-	///////////////////////////////////////////////////////////////////////
-
-	static new<T extends Vec2>(this: TsHack<T>, x: number, y: number): T {
+	static new(x: number, y: number) {
 		return new this(x, y)
 	}
 
-	static zero<T extends Vec2>(this: TsHack<T>) {
+	static zero() {
 		return new this(0, 0)
 	}
 
-	static all<T extends Vec2>(this: TsHack<T>, value: number) {
+	static all(value: number) {
 		return new this(value, value)
 	}
 
-	static array<T extends Vec2>(this: TsHack<T>, v: Vec2Array) {
-		return new this(...v)
-	}
-
-	static import<T extends Vec2>(this: TsHack<T>, {x, y}: Xy) {
-		return new this(x, y)
-	}
-
-	static from(v: Vec2Array | Xy) {
+	static from(v: Vec2Json | Xy) {
 		return Array.isArray(v)
-			? this.array(v)
-			: this.import(v)
+			? new this(...v)
+			: new this(v.x, v.y)
 	}
 
 	static magnitudeSquared(x: number, y: number) {
@@ -56,26 +43,36 @@ export class Vec2 implements Xy {
 	}
 
 	static min(...vecs: Xy[]) {
-		return new Vec2(
+		return new this(
 			Math.min(...vecs.map(v => v.x)),
 			Math.min(...vecs.map(v => v.y)),
 		)
 	}
 
 	static max(...vecs: Xy[]) {
-		return new Vec2(
+		return new this(
 			Math.max(...vecs.map(v => v.x)),
 			Math.max(...vecs.map(v => v.y)),
 		)
 	}
 
-	///////////////////////////////////////////////////////////////////////
+	static fromAngle(radians: number) {
+		return new this(
+			Math.cos(radians),
+			Math.sin(radians),
+		)
+	}
 
 	clone() {
 		return new Vec2(this.x, this.y)
 	}
 
-	array(): Vec2Array {
+	*[Symbol.iterator]() {
+		yield this.x
+		yield this.y
+	}
+
+	toJSON(): Vec2Json {
 		return [this.x, this.y]
 	}
 
@@ -96,8 +93,6 @@ export class Vec2 implements Xy {
 		this.y = y
 		return this
 	}
-
-	///////////////////////////////////////////////////////////////////////
 
 	magnitudeSquared() {
 		return Vec2.magnitudeSquared(this.x, this.y)
@@ -120,6 +115,17 @@ export class Vec2 implements Xy {
 
 	equals(...vecs: Xy[]) {
 		return vecs.every(({x, y}) => this.equals_(x, y))
+	}
+
+	near_(x: number, y: number, epsilon = 1e-6) {
+		return (
+			Math.abs(this.x - x) <= epsilon &&
+			Math.abs(this.y - y) <= epsilon
+		)
+	}
+
+	near({x, y}: Xy, epsilon = 1e-6) {
+		return this.near_(x, y, epsilon)
 	}
 
 	dot_(x: number, y: number) {
@@ -159,8 +165,6 @@ export class Vec2 implements Xy {
 	angleBetween({x, y}: Xy) {
 		return this.angleBetween_(x, y)
 	}
-
-	///////////////////////////////////////////////////////////////////////
 
 	/** mutator */
 	normalize() {

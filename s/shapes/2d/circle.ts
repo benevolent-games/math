@@ -1,8 +1,8 @@
 
 import {Rect} from "./rect.js"
-import {Vec2, Vec2Array, Xy} from "../../core/vec2.js"
+import {Vec2, Vec2Json, Xy} from "../../core/vec2.js"
 
-export type CircleJson = [center: Vec2Array, radius: number]
+export type CircleJson = [center: Vec2Json, radius: number]
 export type CircleLike = {center: Xy, radius: number}
 
 export class Circle {
@@ -18,7 +18,16 @@ export class Circle {
 	}
 
 	toJSON(): CircleJson {
-		return [this.center.clone().array(), this.radius]
+		return [this.center.clone().toJSON(), this.radius]
+	}
+
+	clone() {
+		return new Circle(this.center.clone(), this.radius)
+	}
+
+	set(circle: CircleLike) {
+		this.center.set(circle.center)
+		this.radius = circle.radius
 	}
 
 	translate(delta: Vec2) {
@@ -31,8 +40,5 @@ export class Circle {
 		return Rect.fromCenter(this.center.clone(), size)
 	}
 
-	clone() {
-		return new Circle(this.center.clone(), this.radius)
-	}
 }
 
