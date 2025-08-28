@@ -1,7 +1,7 @@
 
 import {Xyz} from "./vec3.js"
 
-export type QuatArray = [number, number, number, number]
+export type XyzwArray = [x: number, y: number, z: number, w: number]
 export type Xyzw = {x: number, y: number, z: number, w: number}
 
 export class Quat {
@@ -20,18 +20,10 @@ export class Quat {
 		return new this(0, 0, 0, 1)
 	}
 
-	static array(q: QuatArray) {
-		return new this(...q)
-	}
-
-	static import({x, y, z, w}: Xyzw) {
-		return new this(x, y, z, w)
-	}
-
-	static from(q: QuatArray | Xyzw) {
+	static from(q: XyzwArray | Xyzw) {
 		return Array.isArray(q)
-			? this.array(q)
-			: this.import(q)
+			? new this(...q)
+			: new this(q.x, q.y, q.z, q.w)
 	}
 
 	static rotate_(pitch: number, yaw: number, roll: number) {
@@ -42,7 +34,7 @@ export class Quat {
 		return this.identity().rotate(vec)
 	}
 
-	array(): QuatArray {
+	toJSON(): XyzwArray {
 		const {x, y, z, w} = this
 		return [x, y, z, w]
 	}
@@ -52,13 +44,55 @@ export class Quat {
 	}
 
 	clone() {
-		return new Quat(...this.array())
+		return new Quat(...this.toJSON())
+	}
+
+	lengthSquared() {
+		return this.x*this.x + this.y*this.y + this.z*this.z + this.w*this.w
+	}
+
+	length() {
+		return Math.sqrt(this.lengthSquared())
+	}
+
+	isUnit(epsilon=1e-6) {
+		return Math.abs(this.length() - 1) <= epsilon
+	}
+
+	ensureUnit(){
+		if (!this.isUnit()) this.normalize()
+		return this
+	}
+
+	normalize(){
+		const m = this.length()
+		if (!m) {
+			this.x = this.y = this.z = 0
+			this.w = 1
+			return this
+		}
+		this.x /= m
+		this.y /= m
+		this.z /= m
+		this.w /= m
+		return this
+	}
+
+	conjugate() {
+		this.x *= -1
+		this.y *= -1
+		this.z *= -1
+		return this
+	}
+
+	invert() {
+		return this.conjugate().normalize()
 	}
 
 	transform_(x: number, y: number, z: number, w: number, global = false) {
 		if (global) {
-			const original = this.array()
-			return this.set_(x, y, z, w).multiply_(...original)
+			const original = this.clone()
+			return this.set_(x, y, z, w).multiply(original)
 		}
 		else {
 			return this.multiply_(x, y, z, w)

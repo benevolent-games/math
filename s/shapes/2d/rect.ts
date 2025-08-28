@@ -1,8 +1,8 @@
 
-import {Vec2, Vec2Json, Xy} from "../../core/vec2.js"
+import {Vec2, XyArray, Xy} from "../../core/vec2.js"
 import {pointVsRect} from "../../physics/2d/collide2d.js"
 
-export type RectJson = [min: Vec2Json, max: Vec2Json]
+export type RectJson = [min: XyArray, max: XyArray]
 export type RectLike = {min: Xy, max: Xy}
 
 export class Rect {

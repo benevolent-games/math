@@ -1,11 +1,8 @@
 
 import {Scalar} from "../tools/scalar.js"
 
-export type Vec3Array = [number, number, number]
+export type XyzArray = [x: number, y: number, z: number]
 export type Xyz = {x: number, y: number, z: number}
-
-/** https://github.com/microsoft/TypeScript/issues/5863 */
-type TsHack<T> = {new(...a: ConstructorParameters<typeof Vec3>): T}
 
 export class Vec3 {
 	constructor(
@@ -14,32 +11,22 @@ export class Vec3 {
 		public z: number,
 	) {}
 
-	///////////////////////////////////////////////////////////////////////
-
-	static new<T extends Vec3>(this: TsHack<T>, x: number, y: number, z: number) {
+	static new(x: number, y: number, z: number) {
 		return new this(x, y, z)
 	}
 
-	static zero<T extends Vec3>(this: TsHack<T>) {
+	static zero() {
 		return new this(0, 0, 0)
 	}
 
-	static all<T extends Vec3>(this: TsHack<T>, value: number) {
+	static all(value: number) {
 		return new this(value, value, value)
 	}
 
-	static array<T extends Vec3>(this: TsHack<T>, v: Vec3Array) {
-		return new this(...v)
-	}
-
-	static import<T extends Vec3>(this: TsHack<T>, {x, y, z}: Xyz): Vec3 {
-		return new this(x, y, z)
-	}
-
-	static from(v: Vec3Array | Xyz) {
+	static from(v: XyzArray | Xyz) {
 		return Array.isArray(v)
-			? this.array(v)
-			: this.import(v)
+			? new this(...v)
+			: new this(v.x, v.y, v.z)
 	}
 
 	static magnitudeSquared(x: number, y: number, z: number) {
@@ -57,7 +44,7 @@ export class Vec3 {
 	}
 
 	static min(...vecs: Xyz[]) {
-		return new Vec3(
+		return new this(
 			Math.min(...vecs.map(v => v.x)),
 			Math.min(...vecs.map(v => v.y)),
 			Math.min(...vecs.map(v => v.z)),
@@ -65,7 +52,7 @@ export class Vec3 {
 	}
 
 	static max(...vecs: Xyz[]) {
-		return new Vec3(
+		return new this(
 			Math.max(...vecs.map(v => v.x)),
 			Math.max(...vecs.map(v => v.y)),
 			Math.max(...vecs.map(v => v.z)),
@@ -83,13 +70,17 @@ export class Vec3 {
 		}
 	}
 
-	///////////////////////////////////////////////////////////////////////
-
 	clone() {
 		return new Vec3(this.x, this.y, this.z)
 	}
 
-	array(): Vec3Array {
+	*[Symbol.iterator]() {
+		yield this.x
+		yield this.y
+		yield this.z
+	}
+
+	toJSON(): XyzArray {
 		return [this.x, this.y, this.z]
 	}
 
@@ -111,8 +102,6 @@ export class Vec3 {
 		return this
 	}
 
-	///////////////////////////////////////////////////////////////////////
-
 	magnitudeSquared() {
 		return Vec3.magnitudeSquared(this.x, this.y, this.z)
 	}
@@ -128,8 +117,6 @@ export class Vec3 {
 		return `#${toHex(this.x)}${toHex(this.y)}${toHex(this.z)}`
 	}
 
-	///////////////////////////////////////////////////////////////////////
-
 	equals_(x: number, y: number, z: number) {
 		return (
 			this.x === x &&
@@ -139,7 +126,19 @@ export class Vec3 {
 	}
 
 	equals(...vecs: Xyz[]) {
-		return vecs.every(v => this.equals_(v.x, v.y, v.z))
+		return vecs.every(({x, y, z}) => this.equals_(x, y, z))
+	}
+
+	near_(x: number, y: number, z: number, epsilon = 1e-6) {
+		return (
+			Math.abs(this.x - x) <= epsilon &&
+			Math.abs(this.y - y) <= epsilon &&
+			Math.abs(this.z - z) <= epsilon
+		)
+	}
+
+	near({x, y, z}: Xyz, epsilon = 1e-6) {
+		return this.near_(x, y, z, epsilon)
 	}
 
 	distanceSquared_(x: number, y: number, z: number) {
@@ -189,8 +188,6 @@ export class Vec3 {
 	angleBetween({x, y, z}: Xyz) {
 		return this.angleBetween_(x, y, z)
 	}
-
-	///////////////////////////////////////////////////////////////////////
 
 	/** mutator */
 	add_(x: number, y: number, z: number) {

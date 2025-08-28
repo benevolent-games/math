@@ -1,7 +1,5 @@
 
-import {Xyzw} from "./quat.js"
-
-export type Vec4Array = [number, number, number, number]
+import {Xyzw, XyzwArray} from "./quat.js"
 
 export class Vec4 {
 	constructor(
@@ -19,31 +17,29 @@ export class Vec4 {
 		return new this(0, 0, 0, 0)
 	}
 
-	static array(v: Vec4Array) {
-		return new this(...v)
-	}
-
-	static import({x, y, z, w}: Xyzw) {
-		return new this(x, y, z, w)
-	}
-
-	static from(v: Vec4Array | Xyzw) {
+	static from(v: XyzwArray | Xyzw) {
 		return Array.isArray(v)
-			? this.array(v)
-			: this.import(v)
+			? new this(...v)
+			: new this(v.x, v.y, v.z, v.w)
 	}
 
-	array(): Vec4Array {
+	clone() {
+		return new Vec4(this.x, this.y, this.z, this.w)
+	}
+
+	*[Symbol.iterator]() {
+		yield this.x
+		yield this.y
+		yield this.z
+	}
+
+	toJSON(): XyzwArray {
 		const {x, y, z, w} = this
 		return [x, y, z, w]
 	}
 
 	toString() {
 		return `(Vec4 x${this.x.toFixed(2)}, y${this.y.toFixed(2)}, z${this.z.toFixed(2)}, w${this.w.toFixed(2)})`
-	}
-
-	clone() {
-		return new Vec4(...this.array())
 	}
 
 	set_(x: number, y: number, z: number, w: number) {

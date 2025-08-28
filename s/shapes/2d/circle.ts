@@ -1,8 +1,8 @@
 
 import {Rect} from "./rect.js"
-import {Vec2, Vec2Json, Xy} from "../../core/vec2.js"
+import {Vec2, XyArray, Xy} from "../../core/vec2.js"
 
-export type CircleJson = [center: Vec2Json, radius: number]
+export type CircleJson = [center: XyArray, radius: number]
 export type CircleLike = {center: Xy, radius: number}
 
 export class Circle {
@@ -39,6 +39,5 @@ export class Circle {
 		const size = Vec2.all(this.radius * 2)
 		return Rect.fromCenter(this.center.clone(), size)
 	}
-
 }
 

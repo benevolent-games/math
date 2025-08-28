@@ -1,7 +1,7 @@
 
-import {Vec3, Vec3Array, Xyz} from "../../core/vec3.js"
+import {Vec3, XyzArray, Xyz} from "../../core/vec3.js"
 
-export type BoxJson = [min: Vec3Array, max: Vec3Array]
+export type BoxJson = [min: XyzArray, max: XyzArray]
 export type BoxLike = {min: Xyz, max: Xyz}
 
 export class Box {
@@ -28,7 +28,7 @@ export class Box {
 	}
 
 	toJSON(): BoxJson {
-		return [this.min.array(), this.max.array()]
+		return [this.min.toJSON(), this.max.toJSON()]
 	}
 
 	clone() {

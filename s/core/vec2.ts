@@ -1,7 +1,7 @@
 
 import {Scalar} from "../tools/scalar.js"
 
-export type Vec2Json = [x: number, y: number]
+export type XyArray = [x: number, y: number]
 export type Xy = {x: number, y: number}
 
 export class Vec2 implements Xy {
@@ -22,7 +22,7 @@ export class Vec2 implements Xy {
 		return new this(value, value)
 	}
 
-	static from(v: Vec2Json | Xy) {
+	static from(v: XyArray | Xy) {
 		return Array.isArray(v)
 			? new this(...v)
 			: new this(v.x, v.y)
@@ -72,7 +72,7 @@ export class Vec2 implements Xy {
 		yield this.y
 	}
 
-	toJSON(): Vec2Json {
+	toJSON(): XyArray {
 		return [this.x, this.y]
 	}
 
