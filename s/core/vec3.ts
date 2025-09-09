@@ -279,6 +279,22 @@ export class Vec3 {
 	}
 
 	/** mutator */
+	clamp(min: Xyz = {x: 0, y: 0, z: 0}, max: Xyz = {x: 1, y: 1, z: 1}) {
+		this.x = Scalar.clamp(this.x, min.x, max.x)
+		this.y = Scalar.clamp(this.y, min.y, max.y)
+		this.z = Scalar.clamp(this.z, min.z, max.z)
+		return this
+	}
+
+	/** mutator */
+	clampBy(min = 0, max = 1) {
+		this.x = Scalar.clamp(this.x, min, max)
+		this.y = Scalar.clamp(this.y, min, max)
+		this.z = Scalar.clamp(this.z, min, max)
+		return this
+	}
+
+	/** mutator */
 	addBy(delta: number) {
 		this.x += delta
 		this.y += delta
