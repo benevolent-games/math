@@ -239,6 +239,13 @@ export class Vec2 implements Xy {
 	}
 
 	/** mutator */
+	morph(fn: (vec: Vec2) => (Xy | void)) {
+		const result = fn(this)
+		if (result && result !== this) this.set(result)
+		return this
+	}
+
+	/** mutator */
 	clamp(min: Xy = {x: 0, y: 0}, max: Xy = {x: 1, y: 1}) {
 		this.x = Scalar.clamp(this.x, min.x, max.x)
 		this.y = Scalar.clamp(this.y, min.y, max.y)

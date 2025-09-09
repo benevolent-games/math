@@ -271,6 +271,13 @@ export class Vec3 {
 	}
 
 	/** mutator */
+	morph(fn: (vec: Vec3) => (Xyz | void)) {
+		const result = fn(this)
+		if (result && result !== this) this.set(result)
+		return this
+	}
+
+	/** mutator */
 	negate() {
 		this.x = -this.x
 		this.y = -this.y
