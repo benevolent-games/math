@@ -1,8 +1,8 @@
 
-import {MapG} from "@e280/stz"
+import {GMap} from "@e280/stz"
 
 export class HashMap<Key, Value> {
-	#map = new MapG<string, [Key, Value]>
+	#map = new GMap<string, [Key, Value]>
 
 	constructor(
 			private hash: (x: Key) => string,

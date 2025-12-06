@@ -1,5 +1,5 @@
 
-import {MapG} from "@e280/stz"
+import {GMap} from "@e280/stz"
 import {Vec2} from "../core/vec2.js"
 import {Rect} from "../shapes/2d/rect.js"
 import {rectVsRect} from "../physics/2d/collide2d.js"
@@ -32,7 +32,7 @@ export class ZenZone<X> {
 }
 
 export class ZenGrid<X> {
-	#zones = new MapG<string, ZenZone<X>>()
+	#zones = new GMap<string, ZenZone<X>>()
 
 	constructor(private zoneExtent: Vec2) {}
 
