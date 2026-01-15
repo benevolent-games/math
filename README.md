@@ -17,14 +17,14 @@
     // allocate a single vector instance
     const vector = new Vec2(0, 0)
       .add({x: 1, y: 2})
-      .multiplyBy(2)
+      .mulBy(2)
     ```
 - **explicit cloning.**  
-    use `.clone()` to avoid mutating the original.  
+    use `.dup()` to avoid mutating the original.  
     ```ts
     // modify a clone (not the original)
     const vector2 = vector
-      .clone()
+      .dup()
       .normalize()
     ```
 - **underscore-suffixed methods take direct args.**  
