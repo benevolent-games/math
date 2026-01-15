@@ -4,13 +4,21 @@
 - 🔶 deprecation or possible breaking change
 - 🍏 harmless addition, fix, or enhancement
 
+
+
 <br/>
 
-## v0.1
+## v0.2
 
 ### v0.2.0
 - 🟥 remove old deprecated methods and crap
 - 🍏 add shapes2d, collide2d, intersect2d, and optimizers like HashGrid, HashSet, ZenGrid
+
+
+
+<br/>
+
+## v0.1
 
 ### v0.1.0
 - 🍏 initial cool version
