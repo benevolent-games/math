@@ -8,6 +8,20 @@
 
 <br/>
 
+## v0.3
+
+### v0.3.0
+- 🟥 renamed vector `.clone()` to `.dup()`
+- 🟥 renamed vector subtract/multiply/divide to sub/mul/div
+- 🟥 renamed `Radians` to `radians`, also lowercased degrees/turns/arcseconds
+- 🟥 replaced `degrees.toRadians(120)` with `degrees(120)`
+- 🟥 rename `spline.ez.linear` to `spine.ezLinear`
+- 🟥 reworked a lot of exports
+
+
+
+<br/>
+
 ## v0.2
 
 ### v0.2.0

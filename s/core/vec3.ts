@@ -1,5 +1,5 @@
 
-import {Scalar} from "../tools/scalar.js"
+import {Scalar} from "./scalar.js"
 
 export type XyzArray = [x: number, y: number, z: number]
 export type Xyz = {x: number, y: number, z: number}

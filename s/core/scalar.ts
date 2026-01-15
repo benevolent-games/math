@@ -6,7 +6,7 @@ export class Scalar {
 		return new this(x)
 	}
 
-	clone() {
+	dup() {
 		return new Scalar(this.x)
 	}
 
@@ -47,7 +47,7 @@ export class Scalar {
 		return this
 	}
 
-	subtract(...nums: number[]) {
+	sub(...nums: number[]) {
 		for (const n of nums)
 			this.x -= n
 		return this

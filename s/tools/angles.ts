@@ -1,49 +1,49 @@
 
-import {Scalar} from "./scalar.js"
+import {Scalar} from "../core/scalar.js"
 
-const pi = Math.PI
+export const pi = Math.PI
 
-export const Radians = {
+/** basic unit for measuring rotations */
+export const radians = {
 	circle: 2 * pi,
-	halfcircle: pi,
+	halfCircle: pi,
 
 	toDegrees(r: number) {
 		return r * (180 / pi)
 	},
+
 	toArcseconds(r: number) {
-		return Radians.toDegrees(r) * 3600
+		return radians.toDegrees(r) * 3600
 	},
+
 	toTurns(r: number) {
-		return r / Radians.circle
+		return r / radians.circle
 	},
 
 	circleDistance(radiansA: number, radiansB: number): number {
-		const diff = Math.abs(Scalar.wrap(radiansA - radiansB, 0, Radians.circle))
-		return Math.min(diff, Radians.circle - diff)
+		const diff = Math.abs(Scalar.wrap(radiansA - radiansB, 0, radians.circle))
+		return Math.min(diff, radians.circle - diff)
 	},
 }
 
-export const Turns = {
-	toRadians(t: number) {
-		return t * Radians.circle
-	},
-	toDegrees(t: number) {
-		return Radians.toDegrees(Turns.toRadians(t))
-	},
+/** convert turns to radians */
+export function turns(t: number) {
+	return t * radians.circle
 }
+turns.toRadians = turns
+turns.toDegrees = (t: number) => radians.toDegrees(turns(t))
 
-export const Arcseconds = {
-	toRadians(a: number) {
-		return Degrees.toRadians(a / 3600)
-	},
+/** convert arcseconds to radians */
+export function arcseconds(a: number) {
+	return degrees.toRadians(a / 3600)
 }
+arcseconds.toRadians = arcseconds
+arcseconds.toDegrees = (a: number) => radians.toDegrees(arcseconds(a))
 
-export const Degrees = {
-	toRadians(d: number) {
-		return d * (pi / 180)
-	},
-	toTurns(d: number) {
-		return Radians.toTurns(Degrees.toRadians(d))
-	},
+/** convert degrees to radians */
+export function degrees(d: number) {
+	return d * (pi / 180)
 }
+degrees.toRadians = degrees
+degrees.toTurns = (d: number) => radians.toTurns(degrees(d))
 

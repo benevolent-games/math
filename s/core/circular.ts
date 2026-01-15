@@ -6,7 +6,7 @@ const circle = 2 * Math.PI
 export class Circular {
 	constructor(public x: number) {}
 
-	clone() {
+	dup() {
 		return new Circular(this.x)
 	}
 

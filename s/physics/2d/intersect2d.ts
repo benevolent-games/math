@@ -1,7 +1,7 @@
 
 import {Vec2} from "../../core/vec2.js"
+import {Scalar} from "../../core/scalar.js"
 import {Rect} from "../../shapes/2d/rect.js"
-import {Scalar} from "../../tools/scalar.js"
 import {collide2d} from "./collide2d.barrel.js"
 import {Circle} from "../../shapes/2d/circle.js"
 
