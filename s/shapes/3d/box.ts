@@ -22,7 +22,7 @@ export class Box {
 
 	static fromCenter(center: Vec3, size: Vec3) {
 		const halfSize = size.dup().half()
-		const min = center.dup().subtract(halfSize)
+		const min = center.dup().sub(halfSize)
 		const max = center.dup().add(halfSize)
 		return new this(min, max)
 	}
@@ -41,7 +41,7 @@ export class Box {
 	}
 
 	size() {
-		return this.max.dup().subtract(this.min)
+		return this.max.dup().sub(this.min)
 	}
 
 	center() {
@@ -69,14 +69,14 @@ export class Box {
 
 	grow(increase: Vec3) {
 		const halfIncrease = increase.dup().half()
-		this.min.subtract(halfIncrease)
+		this.min.sub(halfIncrease)
 		this.max.add(halfIncrease)
 		return this
 	}
 
 	growBy(increase: number) {
 		const halfIncrease = increase / 2
-		this.min.subtractBy(halfIncrease)
+		this.min.subBy(halfIncrease)
 		this.max.addBy(halfIncrease)
 		return this
 	}

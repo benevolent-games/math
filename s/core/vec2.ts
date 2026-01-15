@@ -39,7 +39,7 @@ export class Vec2 implements Xy {
 	static average(...vectors: Xy[]) {
 		return this.zero()
 			.add(...vectors)
-			.divideBy(vectors.length)
+			.divBy(vectors.length)
 	}
 
 	static min(...vecs: Xy[]) {
@@ -168,17 +168,17 @@ export class Vec2 implements Xy {
 
 	/** mutator */
 	normalize() {
-		return this.divideBy(this.magnitude())
+		return this.divBy(this.magnitude())
 	}
 
 	/** mutator */
 	half() {
-		return this.divideBy(2)
+		return this.divBy(2)
 	}
 
 	/** mutator */
 	double() {
-		return this.multiplyBy(2)
+		return this.mulBy(2)
 	}
 
 	/** mutator */
@@ -206,7 +206,7 @@ export class Vec2 implements Xy {
 	clampMagnitude(max: number) {
 		const mag = this.magnitude()
 		if (mag > max)
-			this.normalize().multiplyBy(max)
+			this.normalize().mulBy(max)
 		return this
 	}
 
@@ -272,21 +272,21 @@ export class Vec2 implements Xy {
 	}
 
 	/** mutator */
-	subtractBy(delta: number) {
+	subBy(delta: number) {
 		this.x -= delta
 		this.y -= delta
 		return this
 	}
 
 	/** mutator */
-	multiplyBy(coefficient: number) {
+	mulBy(coefficient: number) {
 		this.x *= coefficient
 		this.y *= coefficient
 		return this
 	}
 
 	/** mutator */
-	divideBy(divisor: number) {
+	divBy(divisor: number) {
 		if (divisor === 0) return this
 		this.x /= divisor
 		this.y /= divisor
@@ -309,41 +309,41 @@ export class Vec2 implements Xy {
 	}
 
 	/** mutator */
-	subtract_(x: number, y: number) {
+	sub_(x: number, y: number) {
 		this.x -= x
 		this.y -= y
 		return this
 	}
 
 	/** mutator */
-	subtract(...vecs: Xy[]) {
-		for (const {x, y} of vecs) this.subtract_(x, y)
+	sub(...vecs: Xy[]) {
+		for (const {x, y} of vecs) this.sub_(x, y)
 		return this
 	}
 
 	/** mutator */
-	multiply_(x: number, y: number) {
+	mul_(x: number, y: number) {
 		this.x *= x
 		this.y *= y
 		return this
 	}
 
 	/** mutator */
-	multiply(...vecs: Xy[]) {
-		for (const {x, y} of vecs) this.multiply_(x, y)
+	mul(...vecs: Xy[]) {
+		for (const {x, y} of vecs) this.mul_(x, y)
 		return this
 	}
 
 	/** mutator */
-	divide_(x: number, y: number) {
+	div_(x: number, y: number) {
 		if (x !== 0) this.x /= x
 		if (y !== 0) this.y /= y
 		return this
 	}
 
 	/** mutator */
-	divide(...vecs: Xy[]) {
-		for (const {x, y} of vecs) this.divide_(x, y)
+	div(...vecs: Xy[]) {
+		for (const {x, y} of vecs) this.div_(x, y)
 		return this
 	}
 

@@ -124,7 +124,7 @@ export class ZenGrid<X> {
 		return new Vec2(
 			Math.floor(point.x / this.zoneExtent.x),
 			Math.floor(point.y / this.zoneExtent.y),
-		).multiply(this.zoneExtent)
+		).mul(this.zoneExtent)
 	}
 
 	#obtainZone(zoneCorner: Vec2) {

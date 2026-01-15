@@ -40,7 +40,7 @@ export class Vec3 {
 	static average(...vecs: Xyz[]) {
 		return this.zero()
 			.add(...vecs)
-			.divideBy(vecs.length)
+			.divBy(vecs.length)
 	}
 
 	static min(...vecs: Xyz[]) {
@@ -204,7 +204,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	subtract_(x: number, y: number, z: number) {
+	sub_(x: number, y: number, z: number) {
 		this.x -= x
 		this.y -= y
 		this.z -= z
@@ -212,13 +212,13 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	subtract(...vecs: Xyz[]) {
-		for (const {x, y, z} of vecs) this.subtract_(x, y, z)
+	sub(...vecs: Xyz[]) {
+		for (const {x, y, z} of vecs) this.sub_(x, y, z)
 		return this
 	}
 
 	/** mutator */
-	multiply_(x: number, y: number, z: number) {
+	mul_(x: number, y: number, z: number) {
 		this.x *= x
 		this.y *= y
 		this.z *= z
@@ -226,13 +226,13 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	multiply(...vecs: Xyz[]) {
-		for (const {x, y, z} of vecs) this.multiply_(x, y, z)
+	mul(...vecs: Xyz[]) {
+		for (const {x, y, z} of vecs) this.mul_(x, y, z)
 		return this
 	}
 
 	/** mutator */
-	divide_(x: number, y: number, z: number) {
+	div_(x: number, y: number, z: number) {
 		if (x !== 0) this.x /= x
 		if (y !== 0) this.y /= y
 		if (z !== 0) this.z /= z
@@ -240,8 +240,8 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	divide(...vecs: Xyz[]) {
-		for (const {x, y, z} of vecs) this.divide_(x, y, z)
+	div(...vecs: Xyz[]) {
+		for (const {x, y, z} of vecs) this.div_(x, y, z)
 		return this
 	}
 
@@ -249,12 +249,12 @@ export class Vec3 {
 
 	/** mutator */
 	half() {
-		return this.divideBy(2)
+		return this.divBy(2)
 	}
 
 	/** mutator */
 	double() {
-		return this.multiplyBy(2)
+		return this.mulBy(2)
 	}
 
 	/** mutator */
@@ -310,7 +310,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	subtractBy(delta: number) {
+	subBy(delta: number) {
 		this.x -= delta
 		this.y -= delta
 		this.z -= delta
@@ -318,7 +318,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	multiplyBy(delta: number) {
+	mulBy(delta: number) {
 		this.x *= delta
 		this.y *= delta
 		this.z *= delta
@@ -326,7 +326,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	divideBy(divisor: number) {
+	divBy(divisor: number) {
 		if (divisor === 0) return this
 		this.x /= divisor
 		this.y /= divisor
@@ -336,13 +336,13 @@ export class Vec3 {
 
 	/** mutator */
 	normalize() {
-		return this.divideBy(this.magnitude())
+		return this.divBy(this.magnitude())
 	}
 
 	/** mutator */
 	clampMagnitude(max: number) {
 		const magnitude = this.magnitude()
-		if (magnitude > max) this.normalize().multiplyBy(max)
+		if (magnitude > max) this.normalize().mulBy(max)
 		return this
 	}
 

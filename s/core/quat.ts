@@ -98,10 +98,10 @@ export class Quat {
 	transform_(x: number, y: number, z: number, w: number, global = false) {
 		if (global) {
 			const original = this.dup()
-			return this.set_(x, y, z, w).multiply(original)
+			return this.set_(x, y, z, w).mul(original)
 		}
 		else {
-			return this.multiply_(x, y, z, w)
+			return this.mul_(x, y, z, w)
 		}
 	}
 
@@ -154,7 +154,7 @@ export class Quat {
 		return this
 	}
 
-	multiply_(x2: number, y2: number, z2: number, w2: number): Quat {
+	mul_(x2: number, y2: number, z2: number, w2: number): Quat {
 		const {x, y, z, w} = this
 		this.x = w * x2 + x * w2 + y * z2 - z * y2
 		this.y = w * y2 - x * z2 + y * w2 + z * x2
@@ -163,8 +163,8 @@ export class Quat {
 		return this
 	}
 
-	multiply(...quats: Quat[]) {
-		for (const {x, y, z, w} of quats) this.multiply_(x, y, z, w)
+	mul(...quats: Quat[]) {
+		for (const {x, y, z, w} of quats) this.mul_(x, y, z, w)
 		return this
 	}
 }

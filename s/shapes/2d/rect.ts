@@ -24,7 +24,7 @@ export class Rect {
 
 	static fromCenter(center: Vec2, size: Vec2) {
 		const halfSize = size.dup().half()
-		const min = center.dup().subtract(halfSize)
+		const min = center.dup().sub(halfSize)
 		const max = center.dup().add(halfSize)
 		return new this(min, max)
 	}
@@ -50,7 +50,7 @@ export class Rect {
 	}
 
 	size() {
-		return this.max.dup().subtract(this.min)
+		return this.max.dup().sub(this.min)
 	}
 
 	center() {

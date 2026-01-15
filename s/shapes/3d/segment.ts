@@ -8,7 +8,7 @@ export class Segment {
 	) {}
 
 	vector() {
-		return this.end.dup().subtract(this.start)
+		return this.end.dup().sub(this.start)
 	}
 
 	length() {
@@ -30,17 +30,17 @@ export class Segment {
 
 	fromStart(length: number) {
 		const direction = this.vector().normalize()
-		return this.start.dup().add(direction.multiplyBy(length))
+		return this.start.dup().add(direction.mulBy(length))
 	}
 
 	point(fraction: number) {
-		return this.start.dup().add(this.vector().multiplyBy(fraction))
+		return this.start.dup().add(this.vector().mulBy(fraction))
 	}
 
 	scale(fraction: number) {
 		const {center} = this
-		const newHalfVector = this.vector().multiplyBy(fraction / 2)
-		this.start.set(center().subtract(newHalfVector))
+		const newHalfVector = this.vector().mulBy(fraction / 2)
+		this.start.set(center().sub(newHalfVector))
 		this.end.set(center().add(newHalfVector))
 		return this
 	}
