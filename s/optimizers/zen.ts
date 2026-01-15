@@ -131,7 +131,7 @@ export class ZenGrid<X> {
 		const hash = this.#hash(zoneCorner)
 		return this.#zones.guarantee(hash, () => new ZenZone(
 			hash,
-			zoneCorner.clone().add(this.zoneExtent.clone().half()),
+			zoneCorner.dup().add(this.zoneExtent.dup().half()),
 			this.zoneExtent,
 		))
 	}

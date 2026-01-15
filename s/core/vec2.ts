@@ -63,7 +63,7 @@ export class Vec2 implements Xy {
 		)
 	}
 
-	clone() {
+	dup() {
 		return new Vec2(this.x, this.y)
 	}
 

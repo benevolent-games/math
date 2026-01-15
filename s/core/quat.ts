@@ -43,7 +43,7 @@ export class Quat {
 		return `(Quat x${this.x.toFixed(2)}, y${this.y.toFixed(2)}, z${this.z.toFixed(2)}, w${this.w.toFixed(2)})`
 	}
 
-	clone() {
+	dup() {
 		return new Quat(...this.toJSON())
 	}
 
@@ -97,7 +97,7 @@ export class Quat {
 
 	transform_(x: number, y: number, z: number, w: number, global = false) {
 		if (global) {
-			const original = this.clone()
+			const original = this.dup()
 			return this.set_(x, y, z, w).multiply(original)
 		}
 		else {

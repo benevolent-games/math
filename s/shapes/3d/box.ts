@@ -17,13 +17,13 @@ export class Box {
 	}
 
 	static fromCorner(min: Vec3, size: Vec3) {
-		return new this(min, min.clone().add(size))
+		return new this(min, min.dup().add(size))
 	}
 
 	static fromCenter(center: Vec3, size: Vec3) {
-		const halfSize = size.clone().half()
-		const min = center.clone().subtract(halfSize)
-		const max = center.clone().add(halfSize)
+		const halfSize = size.dup().half()
+		const min = center.dup().subtract(halfSize)
+		const max = center.dup().add(halfSize)
 		return new this(min, max)
 	}
 
@@ -32,7 +32,7 @@ export class Box {
 	}
 
 	clone() {
-		return new Box(this.min.clone(), this.max.clone())
+		return new Box(this.min.dup(), this.max.dup())
 	}
 
 	set(box: BoxLike) {
@@ -41,11 +41,11 @@ export class Box {
 	}
 
 	size() {
-		return this.max.clone().subtract(this.min)
+		return this.max.dup().subtract(this.min)
 	}
 
 	center() {
-		return this.min.clone().add(this.size().half())
+		return this.min.dup().add(this.size().half())
 	}
 
 	normalize() {
@@ -68,7 +68,7 @@ export class Box {
 	}
 
 	grow(increase: Vec3) {
-		const halfIncrease = increase.clone().half()
+		const halfIncrease = increase.dup().half()
 		this.min.subtract(halfIncrease)
 		this.max.add(halfIncrease)
 		return this

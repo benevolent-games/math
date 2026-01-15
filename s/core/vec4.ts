@@ -23,7 +23,7 @@ export class Vec4 {
 			: new this(v.x, v.y, v.z, v.w)
 	}
 
-	clone() {
+	dup() {
 		return new Vec4(this.x, this.y, this.z, this.w)
 	}
 

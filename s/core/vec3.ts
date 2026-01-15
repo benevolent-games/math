@@ -70,7 +70,7 @@ export class Vec3 {
 		}
 	}
 
-	clone() {
+	dup() {
 		return new Vec3(this.x, this.y, this.z)
 	}
 

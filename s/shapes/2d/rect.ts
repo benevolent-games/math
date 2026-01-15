@@ -18,19 +18,19 @@ export class Rect {
 	}
 
 	static fromCorner(min: Vec2, size: Vec2) {
-		const max = min.clone().add(size)
+		const max = min.dup().add(size)
 		return new this(min, max)
 	}
 
 	static fromCenter(center: Vec2, size: Vec2) {
-		const halfSize = size.clone().half()
-		const min = center.clone().subtract(halfSize)
-		const max = center.clone().add(halfSize)
+		const halfSize = size.dup().half()
+		const min = center.dup().subtract(halfSize)
+		const max = center.dup().add(halfSize)
 		return new this(min, max)
 	}
 
 	clone() {
-		return new Rect(this.min.clone(), this.max.clone())
+		return new Rect(this.min.dup(), this.max.dup())
 	}
 
 	toJSON(): RectJson {
@@ -50,11 +50,11 @@ export class Rect {
 	}
 
 	size() {
-		return this.max.clone().subtract(this.min)
+		return this.max.dup().subtract(this.min)
 	}
 
 	center() {
-		return this.min.clone().add(this.size().half())
+		return this.min.dup().add(this.size().half())
 	}
 
 	translate(delta: Vec2) {

@@ -18,11 +18,11 @@ export class Circle {
 	}
 
 	toJSON(): CircleJson {
-		return [this.center.clone().toJSON(), this.radius]
+		return [this.center.dup().toJSON(), this.radius]
 	}
 
 	clone() {
-		return new Circle(this.center.clone(), this.radius)
+		return new Circle(this.center.dup(), this.radius)
 	}
 
 	set(circle: CircleLike) {
@@ -37,7 +37,7 @@ export class Circle {
 
 	boundingBox() {
 		const size = Vec2.all(this.radius * 2)
-		return Rect.fromCenter(this.center.clone(), size)
+		return Rect.fromCenter(this.center.dup(), size)
 	}
 }
 

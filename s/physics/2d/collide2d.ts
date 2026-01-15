@@ -35,7 +35,7 @@ export function rectVsCircle(rect: Rect, circle: Circle) {
 		Scalar.clamp(circle.center.x, rect.min.x, rect.max.x),
 		Scalar.clamp(circle.center.y, rect.min.y, rect.max.y),
 	)
-	const difference = circle.center.clone().subtract(clamped)
+	const difference = circle.center.dup().subtract(clamped)
 	const distanceSquared = (difference.x ** 2) + (difference.y ** 2)
 	const radiusSquared = circle.radius ** 2
 	return distanceSquared <= radiusSquared

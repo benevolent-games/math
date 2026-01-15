@@ -33,7 +33,7 @@ export function intersectRectVsRect(a: Rect, b: Rect) {
 		? new Vec2(bCenter.x > aCenter.x ? -1 : 1, 0)
 		: new Vec2(0, bCenter.y > aCenter.y ? -1 : 1)
 
-	const normalB = normalA.clone().multiplyBy(-1)
+	const normalB = normalA.dup().multiplyBy(-1)
 
 	return new Intersection(contactPoint, depth, normalA, normalB)
 }
@@ -45,13 +45,13 @@ export function intersectRectVsCircle(rect: Rect, circle: Circle) {
 		Scalar.clamp(circle.center.x, rect.min.x, rect.max.x),
 		Scalar.clamp(circle.center.y, rect.min.y, rect.max.y),
 	)
-	const difference = circle.center.clone().subtract(clamped)
+	const difference = circle.center.dup().subtract(clamped)
 	const distance = difference.magnitude()
 	const depth = circle.radius - distance
 
 	const contactPoint = clamped
 	const normalA = difference.normalize()
-	const normalB = normalA.clone().multiplyBy(-1)
+	const normalB = normalA.dup().multiplyBy(-1)
 
 	return new Intersection(contactPoint, depth, normalA, normalB)
 }
@@ -68,7 +68,7 @@ export function intersectCircleVsCircle(a: Circle, b: Circle) {
 		? new Vec2(1, 0) // fallback for perfectly overlapping circles
 		: new Vec2(dx / distance, dy / distance)
 
-	const normalB = normalA.clone().multiplyBy(-1)
+	const normalB = normalA.dup().multiplyBy(-1)
 
 	const contactPoint = new Vec2(
 		(a.center.x + b.center.x) / 2,
