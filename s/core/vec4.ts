@@ -34,9 +34,13 @@ export class Vec4 {
 		yield this.w
 	}
 
-	toJSON(): XyzwArray {
+	array(): XyzwArray {
 		const {x, y, z, w} = this
 		return [x, y, z, w]
+	}
+
+	toJSON(): XyzwArray {
+		return this.array()
 	}
 
 	toString() {

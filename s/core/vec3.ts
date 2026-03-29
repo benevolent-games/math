@@ -80,8 +80,12 @@ export class Vec3 {
 		yield this.z
 	}
 
-	toJSON(): XyzArray {
+	array(): XyzArray {
 		return [this.x, this.y, this.z]
+	}
+
+	toJSON(): XyzArray {
+		return this.array()
 	}
 
 	toString() {
