@@ -16,6 +16,9 @@
 - 🟥 renamed `Radians` to `radians`, also lowercased degrees/turns/arcseconds
 - 🟥 replaced `degrees.toRadians(120)` with `degrees(120)`
 - 🟥 rename `spline.ez.linear` to `spine.ezLinear`
+- 🟥 rename `Randy.randomSeed` to `Randy.seed`
+- 🟥 rename `Randy.makeRandom` to `Randy.random`
+- 🟥 replaec `Noise` class with `makeNoiseSampler` fn
 - 🟥 reworked a lot of exports
 
 
