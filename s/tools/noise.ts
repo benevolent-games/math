@@ -1,22 +1,12 @@
 
-import {Randy, Random} from "./randy.js"
 import {createNoise2D} from "simplex-noise"
+import {Random} from "./randy.js"
 
-export class Noise {
-	static seed(seed: number = Randy.seed()) {
-		const random = Randy.random(seed)
-		return new this(random)
-	}
+export function makeNoiseSampler(random: Random) {
+	const noise2d = createNoise2D(random)
 
-	#n2d: (x: number, y: number) => number
-
-	constructor(public readonly random: Random) {
-		this.#n2d = createNoise2D(random)
-	}
-
-	/** sample the noise field, returning a number from 0 to 1. */
-	sample(x: number, y = 0, scale = 1) {
-		const s = this.#n2d(x * scale, y * scale)
+	return (x: number, y = 0, scale = 1) => {
+		const s = noise2d(x * scale, y * scale)
 		return (s + 1) / 2
 	}
 }
