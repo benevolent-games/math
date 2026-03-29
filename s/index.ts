@@ -9,6 +9,7 @@ export * from "./core/vec4.js"
 export * from "./tools/angles.js"
 export * from "./tools/noise.js"
 export * from "./tools/randy.js"
+export * from "./tools/make-noise.js"
 export * as spline from "./tools/spline.js"
 
 export * from "./optimizers/hash-map.js"
