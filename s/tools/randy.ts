@@ -5,17 +5,17 @@ export type Random = () => number
 export class Randy {
 	random: Random
 
-	constructor(public readonly seed: number = Randy.randomSeed()) {
-		this.random = Randy.makeRandom(seed)
+	constructor(public readonly seed = Randy.seed()) {
+		this.random = Randy.random(seed)
 	}
 
 	/** obtain a random positive 32 bit integer. */
-	static randomSeed() {
+	static seed() {
 		return Math.floor(Math.random() * 2147483647)
 	}
 
 	/** seed a pseudo-random number generator function that produces numbers between 0 and 1. */
-	static makeRandom(seed: number): Random {
+	static random(seed = Randy.seed()): Random {
 		seed = (seed ^ 0x6D2B79F5) + 0x1E35A7BD
 		seed = (Math.abs(seed | 0) % 2147483647) || 1
 

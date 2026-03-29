@@ -3,8 +3,8 @@ import {Randy, Random} from "./randy.js"
 import {createNoise2D} from "simplex-noise"
 
 export class Noise {
-	static seed(seed: number = Randy.randomSeed()) {
-		const random = Randy.makeRandom(seed)
+	static seed(seed: number = Randy.seed()) {
+		const random = Randy.random(seed)
 		return new this(random)
 	}
 
