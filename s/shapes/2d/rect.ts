@@ -29,6 +29,10 @@ export class Rect {
 		return new this(min, max)
 	}
 
+	static point(vec: Xy) {
+		return new this(Vec2.from(vec), Vec2.from(vec))
+	}
+
 	clone() {
 		return new Rect(this.min.dup(), this.max.dup())
 	}
