@@ -10,6 +10,13 @@
 
 ## v0.3
 
+### v0.3.2
+- 🍏 add `Lattice` spatial optimizer for rect queries
+- 🍏 loosen collide2d types to use Xy, RectLike, CircleLike
+
+### v0.3.1
+- 🍏 add vector instance `.from` method
+
 ### v0.3.0
 - 🟥 renamed vector `.clone()` to `.dup()`
 - 🟥 renamed vector subtract/multiply/divide to sub/mul/div
