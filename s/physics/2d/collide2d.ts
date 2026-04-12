@@ -1,10 +1,10 @@
 
-import {Vec2} from "../../core/vec2.js"
+import {Vec2, Xy} from "../../core/vec2.js"
 import {Scalar} from "../../core/scalar.js"
-import {Rect} from "../../shapes/2d/rect.js"
-import {Circle} from "../../shapes/2d/circle.js"
+import {RectLike} from "../../shapes/2d/rect.js"
+import {CircleLike} from "../../shapes/2d/circle.js"
 
-export function pointVsRect(point: Vec2, box: Rect) {
+export function pointVsRect(point: Xy, box: RectLike) {
 	const {min, max} = box
 	return (
 		point.x >= min.x &&
@@ -14,14 +14,14 @@ export function pointVsRect(point: Vec2, box: Rect) {
 	)
 }
 
-export function pointVsCircle(point: Vec2, circle: Circle) {
+export function pointVsCircle(point: Xy, circle: CircleLike) {
 	const dx = point.x - circle.center.x
 	const dy = point.y - circle.center.y
 	const distanceSquared = (dx ** 2) + (dy ** 2)
 	return distanceSquared <= (circle.radius ** 2)
 }
 
-export function rectVsRect(a: Rect, b: Rect) {
+export function rectVsRect(a: RectLike, b: RectLike) {
 	return !(
 		a.max.x <= b.min.x ||
 		a.min.x >= b.max.x ||
@@ -30,18 +30,18 @@ export function rectVsRect(a: Rect, b: Rect) {
 	)
 }
 
-export function rectVsCircle(rect: Rect, circle: Circle) {
+export function rectVsCircle(rect: RectLike, circle: CircleLike) {
 	const clamped = new Vec2(
 		Scalar.clamp(circle.center.x, rect.min.x, rect.max.x),
 		Scalar.clamp(circle.center.y, rect.min.y, rect.max.y),
 	)
-	const difference = circle.center.dup().sub(clamped)
+	const difference = Vec2.from(circle.center).sub(clamped)
 	const distanceSquared = (difference.x ** 2) + (difference.y ** 2)
 	const radiusSquared = circle.radius ** 2
 	return distanceSquared <= radiusSquared
 }
 
-export function circleVsCircle(circleA: Circle, circleB: Circle) {
+export function circleVsCircle(circleA: CircleLike, circleB: CircleLike) {
 	const dx = circleB.center.x - circleA.center.x
 	const dy = circleB.center.y - circleA.center.y
 	const distanceSquared = (dx ** 2) + (dy ** 2)
