@@ -13,6 +13,7 @@ export * as spline from "./tools/spline.js"
 
 export * from "./optimizers/hash-map.js"
 export * from "./optimizers/hash-set.js"
+export * from "./optimizers/lattice.js"
 export * from "./optimizers/zen.js"
 
 export * from "./physics/index.js"

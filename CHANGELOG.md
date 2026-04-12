@@ -10,6 +10,9 @@
 
 ## v0.3
 
+### v0.3.3
+- 🍏 export lattice (oops, forgot it last version)
+
 ### v0.3.2
 - 🍏 add `Lattice` spatial optimizer for rect queries
 - 🍏 loosen collide2d types to use Xy, RectLike, CircleLike
