@@ -1,8 +1,8 @@
 
 export class Scalar {
-	constructor(public x: number) {}
+	constructor(public x = 0) {}
 
-	static new(x: number) {
+	static new(x = 0) {
 		return new this(x)
 	}
 

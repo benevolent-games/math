@@ -4,7 +4,7 @@ import {Scalar} from "./scalar.js"
 const circle = 2 * Math.PI
 
 export class Circular {
-	constructor(public x: number) {}
+	constructor(public x = 0) {}
 
 	dup() {
 		return new Circular(this.x)

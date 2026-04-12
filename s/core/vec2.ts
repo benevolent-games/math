@@ -6,11 +6,11 @@ export type Xy = {x: number, y: number}
 
 export class Vec2 implements Xy {
 	constructor(
-		public x: number,
-		public y: number,
+		public x = 0,
+		public y = 0,
 	) {}
 
-	static new(x: number, y: number) {
+	static new(x = 0, y = 0) {
 		return new this(x, y)
 	}
 

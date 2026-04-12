@@ -6,12 +6,12 @@ export type Xyz = {x: number, y: number, z: number}
 
 export class Vec3 {
 	constructor(
-		public x: number,
-		public y: number,
-		public z: number,
+		public x = 0,
+		public y = 0,
+		public z = 0,
 	) {}
 
-	static new(x: number, y: number, z: number) {
+	static new(x = 0, y = 0, z = 0) {
 		return new this(x, y, z)
 	}
 

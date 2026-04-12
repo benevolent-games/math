@@ -6,13 +6,13 @@ export type Xyzw = {x: number, y: number, z: number, w: number}
 
 export class Quat {
 	constructor(
-		public x: number,
-		public y: number,
-		public z: number,
-		public w: number,
+		public x = 0,
+		public y = 0,
+		public z = 0,
+		public w = 0,
 	) {}
 
-	static new(x: number, y: number, z: number, w: number) {
+	static new(x = 0, y = 0, z = 0, w = 0) {
 		return new this(x, y, z, w)
 	}
 
