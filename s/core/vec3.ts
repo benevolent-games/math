@@ -92,6 +92,7 @@ export class Vec3 {
 		return `(Vec3 x${this.x.toFixed(2)}, y${this.y.toFixed(2)}, z${this.z.toFixed(2)})`
 	}
 
+	/** mutator */
 	set_(x: number, y: number, z: number) {
 		this.x = x
 		this.y = y
@@ -99,12 +100,31 @@ export class Vec3 {
 		return this
 	}
 
+	/** mutator */
 	set({x, y, z}: Xyz) {
 		this.x = x
 		this.y = y
 		this.z = z
 		return this
 	}
+
+	/** mutator */
+	from(v: Xyz | XyzArray) {
+		if (Array.isArray(v)) {
+			const [x, y, z] = v
+			this.x = x
+			this.y = y
+			this.z = z
+		}
+		else {
+			const {x, y, z} = v
+			this.x = x
+			this.y = y
+			this.z = z
+		}
+		return this
+	}
+
 
 	magnitudeSquared() {
 		return Vec3.magnitudeSquared(this.x, this.y, this.z)

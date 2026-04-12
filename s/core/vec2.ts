@@ -98,6 +98,21 @@ export class Vec2 implements Xy {
 		return this
 	}
 
+	/** mutator */
+	from(v: Xy | XyArray) {
+		if (Array.isArray(v)) {
+			const [x, y] = v
+			this.x = x
+			this.y = y
+		}
+		else {
+			const {x, y} = v
+			this.x = x
+			this.y = y
+		}
+		return this
+	}
+
 	magnitudeSquared() {
 		return Vec2.magnitudeSquared(this.x, this.y)
 	}
