@@ -6,7 +6,7 @@ import {collide2d} from "../physics/2d/collide2d.barrel.js"
 
 export class Lattice<X> {
 	#cellsByHash = new GMap<string, Cell<X>>()
-	#memberships = new GMap<X, {rect: RectLike, cells: Set<Cell<X>>}>()
+	#memberships = new GMap<X, {rect: Rect, cells: Set<Cell<X>>}>()
 
 	constructor(private cellExtent: Vec2) {}
 
@@ -25,7 +25,7 @@ export class Lattice<X> {
 	upsert(item: X, rect: RectLike) {
 		this.remove(item)
 		const cells = new Set(this.#cellsForRect(rect))
-		this.#memberships.set(item, {rect, cells})
+		this.#memberships.set(item, {rect: Rect.from(rect), cells})
 		for (const cell of cells)
 			cell.items.add(item)
 	}
