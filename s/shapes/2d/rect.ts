@@ -17,15 +17,15 @@ export class Rect {
 			: new this(Vec2.from(data.min), Vec2.from(data.max))
 	}
 
-	static fromCorner(min: Vec2, size: Vec2) {
-		const max = min.dup().add(size)
-		return new this(min, max)
+	static fromCorner(min: Xy, size: Xy) {
+		const max = Vec2.from(min).add(size)
+		return new this(Vec2.from(min), max)
 	}
 
-	static fromCenter(center: Vec2, size: Vec2) {
-		const halfSize = size.dup().half()
-		const min = center.dup().sub(halfSize)
-		const max = center.dup().add(halfSize)
+	static fromCenter(center: Xy, size: Xy) {
+		const halfSize = Vec2.from(size).half()
+		const min = Vec2.from(center).sub(halfSize)
+		const max = Vec2.from(center).add(halfSize)
 		return new this(min, max)
 	}
 
@@ -34,6 +34,10 @@ export class Rect {
 	}
 
 	clone() {
+		return new Rect(this.min.dup(), this.max.dup())
+	}
+
+	dup() {
 		return new Rect(this.min.dup(), this.max.dup())
 	}
 
@@ -69,6 +73,13 @@ export class Rect {
 
 	contains(point: Vec2) {
 		return pointVsRect(point, this)
+	}
+
+	equals(rect: RectLike) {
+		return (
+			this.min.equals(rect.min) &&
+			this.max.equals(rect.max)
+		)
 	}
 
 	boundingBox() {
