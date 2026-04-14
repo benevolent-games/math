@@ -24,10 +24,9 @@ export function rectVsRect(a: Rect, b: Rect) {
 	const aCenter = a.center()
 	const bCenter = b.center()
 
-	const contactPoint = new Vec2(
-		Scalar.clamp((aCenter.x + bCenter.x) / 2, b.min.x, b.max.x),
-		Scalar.clamp((aCenter.y + bCenter.y) / 2, b.min.y, b.max.y)
-	)
+	const contactPoint = Vec2
+		.average(aCenter, bCenter)
+		.clamp(a.min, a.max)
 
 	const normalA = depth === overlapX
 		? new Vec2(bCenter.x > aCenter.x ? -1 : 1, 0)
