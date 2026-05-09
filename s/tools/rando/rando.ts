@@ -1,53 +1,28 @@
 
-import {Random} from "./rando/types.js"
+import {Random} from "./types.js"
+import {u32ify} from "./u32ify.js"
 
-/** utility for generating and using random numbers. */
-export class Randy {
-	random: Random
+export class Rando {
+	constructor(public random: Random = Math.random) {}
 
-	constructor(public readonly seed = Randy.seed()) {
-		this.random = Randy.random(seed)
-	}
-
-	/** obtain a random positive 32 bit integer. */
-	static seed() {
-		return Math.floor(Math.random() * 2147483647)
-	}
-
-	/** seed a pseudo-random number generator function that produces numbers between 0 and 1. */
-	static random(seed = Randy.seed()): Random {
-		seed = (seed ^ 0x6D2B79F5) + 0x1E35A7BD
-		seed = (Math.abs(seed | 0) % 2147483647) || 1
-
-		function random() {
-			seed = (Math.imul(48271, seed) | 0) % 2147483647
-			return (seed & 2147483647) / 2147483648
-		}
-
-		random() // discard first value
-		return random
-	}
-
-	/** obtain a random positive integer. */
-	integer() {
-		return Math.floor(this.random() * 2147483647)
+	/** obtain a random positive u32 integer. */
+	u32() {
+		return u32ify(this.random())
 	}
 
 	/** return true or false, given a 0 to 1 probability fraction. */
 	roll(chance = 0.5) {
-		return this.random() <= chance
+		return this.random() < chance
 	}
 
 	/** generate a random number between two numbers. */
-	range(a: number, b: number) {
-		const difference = b - a
-		const value = difference * this.random()
-		return a + value
+	range(min: number, max: number) {
+		return min + (this.random() * (max - min))
 	}
 
 	/** generate a random integer between two numbers (inclusive). */
-	integerRange(a: number, b: number) {
-		return Math.round(this.range(a, b))
+	intRange(min: number, max: number) {
+		return min + Math.floor(this.random() * (max - min + 1))
 	}
 
 	/** randomly choose an index given an array length. */
@@ -56,7 +31,7 @@ export class Randy {
 	}
 
 	/** return a random item from the given array. */
-	choose<T>(array: T[]) {
+	pick<T>(array: T[]) {
 		return array[this.index(array.length)]
 	}
 
@@ -80,7 +55,7 @@ export class Randy {
 	}
 
 	/** remove and return a number of items from the given array. */
-	take<T>(count: number, array: T[]) {
+	extract<T>(count: number, array: T[]) {
 		const selection: T[] = []
 		for (let i = 0; i < count; i++) {
 			if (array.length === 0)
@@ -90,7 +65,7 @@ export class Randy {
 		return selection
 	}
 
-	/** shuffle an array in-place using (fisher-yates) */
+	/** shuffle an array in-place using (fisher-yates). */
 	shuffle<T>(array: T[]) {
 		for (let i = array.length - 1; i > 0; i--) {
 			const j = Math.floor(this.random() * (i + 1))

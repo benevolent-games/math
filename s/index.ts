@@ -6,6 +6,12 @@ export * from "./core/vec2.js"
 export * from "./core/vec3.js"
 export * from "./core/vec4.js"
 
+export * from "./tools/rando/crypto-random.js"
+export * from "./tools/rando/rando.js"
+export * from "./tools/rando/seed.js"
+export * from "./tools/rando/types.js"
+export * from "./tools/rando/u32ify.js"
+
 export * from "./tools/angles.js"
 export * from "./tools/randy.js"
 export * from "./tools/noise.js"

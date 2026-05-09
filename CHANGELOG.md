@@ -10,6 +10,16 @@
 
 ## v0.3
 
+### v0.3.5
+- 🔶 deprecate `Randy` in favor of new `Rando`
+- 🍏 add `Rando` class
+- 🍏 add `seed` fn
+- 🍏 add `cryptoRandom` fn
+- 🍏 add `u32ify` fn
+
+### v0.3.4
+- 🍏 improve rect ergos
+
 ### v0.3.3
 - 🍏 export lattice (oops, forgot it last version)
 
