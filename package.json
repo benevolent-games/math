@@ -21,13 +21,13 @@
 		"count": "find s -path '*/_archive' -prune -o -name '*.ts' -exec wc -l {} +"
 	},
 	"dependencies": {
-		"@e280/stz": "^0.2.32",
+		"@e280/stz": "^0.2.36",
 		"simplex-noise": "^4.0.3"
 	},
 	"devDependencies": {
-		"@e280/octo": "^0.1.0",
-		"@e280/science": "^0.1.10",
-		"typescript": "^6.0.2"
+		"@e280/octo": "^0.1.1",
+		"@e280/science": "^0.1.11",
+		"typescript": "^6.0.3"
 	},
 	"repository": {
 		"type": "git",
