@@ -1,7 +1,10 @@
 
 import {Random} from "./rando/types.js"
 
-/** utility for generating and using random numbers. */
+/**
+ * utility for generating and using random numbers.
+ * @deprecated replaced by `Rando`
+ */
 export class Randy {
 	random: Random
 
