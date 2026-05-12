@@ -1,8 +1,8 @@
 
-import {GMap} from "@e280/stz"
+import {guarantee, need} from "@e280/stz"
 
 export class HashMap<Key, Value> {
-	#map = new GMap<string, [Key, Value]>
+	#map = new Map<string, [Key, Value]>
 
 	constructor(
 			private hash: (x: Key) => string,
@@ -23,7 +23,7 @@ export class HashMap<Key, Value> {
 	}
 
 	require(key: Key) {
-		return this.#map.require(this.hash(key))[1]
+		return need(this.#map, this.hash(key))[1]
 	}
 
 	has(key: Key) {
@@ -64,7 +64,7 @@ export class HashMap<Key, Value> {
 	}
 
 	guarantee(key: Key, fn: () => Value) {
-		const [,value] = this.#map.guarantee(this.hash(key), () => [key, fn()])
+		const [,value] = guarantee(this.#map, this.hash(key), () => [key, fn()])
 		return value
 	}
 }

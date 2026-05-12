@@ -1,12 +1,12 @@
 
-import {GMap} from "@e280/stz"
+import {guarantee, need} from "@e280/stz"
 import {Vec2, Xy} from "../core/vec2.js"
 import {Rect, RectLike} from "../shapes/2d/rect.js"
 import {collide2d} from "../physics/2d/collide2d.barrel.js"
 
 export class Lattice<X> {
-	#cellsByHash = new GMap<string, Cell<X>>()
-	#memberships = new GMap<X, {rect: Rect, cells: Set<Cell<X>>}>()
+	#cellsByHash = new Map<string, Cell<X>>()
+	#memberships = new Map<X, {rect: Rect, cells: Set<Cell<X>>}>()
 
 	constructor(private cellExtent: Vec2) {}
 
@@ -59,7 +59,7 @@ export class Lattice<X> {
 				if (seen.has(item)) continue
 				seen.add(item)
 
-				const membership = this.#memberships.require(item)
+				const membership = need(this.#memberships, item)
 				if (collide2d.rectVsRect(membership.rect, rect))
 					yield item
 			}
@@ -79,7 +79,7 @@ export class Lattice<X> {
 
 	*#cellsForRect(rect: RectLike) {
 		for (const index of this.#cellIndices(rect)) {
-			yield this.#cellsByHash.guarantee(hash(index), () => {
+			yield guarantee(this.#cellsByHash, hash(index), () => {
 				const min = index.mul(this.cellExtent)
 				const max = min.dup().add(this.cellExtent)
 				return new Cell(new Rect(min, max))

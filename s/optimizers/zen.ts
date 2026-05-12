@@ -1,5 +1,5 @@
 
-import {GMap} from "@e280/stz"
+import {guarantee} from "@e280/stz"
 import {Vec2} from "../core/vec2.js"
 import {Rect} from "../shapes/2d/rect.js"
 import {rectVsRect} from "../physics/2d/collide2d.js"
@@ -32,7 +32,7 @@ export class ZenZone<X> {
 }
 
 export class ZenGrid<X> {
-	#zones = new GMap<string, ZenZone<X>>()
+	#zones = new Map<string, ZenZone<X>>()
 
 	constructor(private zoneExtent: Vec2) {}
 
@@ -129,7 +129,7 @@ export class ZenGrid<X> {
 
 	#obtainZone(zoneCorner: Vec2) {
 		const hash = this.#hash(zoneCorner)
-		return this.#zones.guarantee(hash, () => new ZenZone(
+		return guarantee(this.#zones, hash, () => new ZenZone(
 			hash,
 			zoneCorner.dup().add(this.zoneExtent.dup().half()),
 			this.zoneExtent,
