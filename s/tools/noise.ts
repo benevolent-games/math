@@ -1,6 +1,6 @@
 
 import {createNoise2D} from "simplex-noise"
-import {Random} from "./rando/types.js"
+import {Random} from "./rand/types.js"
 
 export function makeNoiseSampler(random: Random) {
 	const noise2d = createNoise2D(random)

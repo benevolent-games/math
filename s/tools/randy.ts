@@ -1,5 +1,5 @@
 
-import {Random} from "./rando/types.js"
+import {Random} from "./rand/types.js"
 
 /**
  * utility for generating and using random numbers.

@@ -2,7 +2,7 @@
 import {Random} from "./types.js"
 import {u32ify} from "./u32ify.js"
 
-export class Rando {
+export class Rand {
 	constructor(public random: Random = Math.random) {}
 
 	/** obtain a random positive u32 integer. */

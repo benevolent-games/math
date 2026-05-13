@@ -11,8 +11,8 @@
 ## v0.3
 
 ### v0.3.5
-- 🔶 deprecate `Randy` in favor of new `Rando`
-- 🍏 add `Rando` class
+- 🔶 deprecate `Randy` in favor of new `Rand`
+- 🍏 add `Rand` class
 - 🍏 add `seed` fn
 - 🍏 add `cryptoRandom` fn
 - 🍏 add `u32ify` fn
