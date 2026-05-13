@@ -5,44 +5,37 @@ import {u32ify} from "./u32ify.js"
 export class Rand {
 	constructor(public random: Random = Math.random) {}
 
-	/** obtain a random positive u32 integer. */
+	/** random positive unsigned 32-bit integer. */
 	u32() {
 		return u32ify(this.random())
 	}
 
-	/** return true or false, given a 0 to 1 probability fraction. */
+	/** randomly returns true given a probability fraction. */
 	roll(chance = 0.5) {
 		return this.random() < chance
 	}
 
-	/** generate a random number between two numbers. */
+	/** random number between two numbers. */
 	range(min: number, max: number) {
 		return min + (this.random() * (max - min))
 	}
 
-	/** generate a random integer between two numbers (inclusive). */
-	intRange(min: number, max: number) {
+	/** random integer from min to max (inclusive). */
+	integerRange(min: number, max: number) {
 		return min + Math.floor(this.random() * (max - min + 1))
 	}
 
-	/** randomly choose an index given an array length. */
+	/** random array index given an array length. */
 	index(length: number) {
 		return Math.floor(this.random() * length)
 	}
 
-	/** return a random item from the given array. */
+	/** randomly choose one item from the provided array. */
 	pick<T>(array: T[]) {
 		return array[this.index(array.length)]
 	}
 
-	/** remove and return a random item from the given array. */
-	yoink<T>(array: T[]) {
-		const index = this.index(array.length)
-		const [item] = array.splice(index, 1)
-		return item
-	}
-
-	/** randomly select a number of array items. */
+	/** randomly select a given number of array items. */
 	select<T>(count: number, array: T[]) {
 		const copy = [...array]
 		if (count >= array.length)
@@ -54,7 +47,14 @@ export class Rand {
 		return selection
 	}
 
-	/** remove and return a number of items from the given array. */
+	/** remove a random item from the array, and return it. */
+	yoink<T>(array: T[]) {
+		const index = this.index(array.length)
+		const [item] = array.splice(index, 1)
+		return item
+	}
+
+	/** randomly remove the given number of items from the array. */
 	extract<T>(count: number, array: T[]) {
 		const selection: T[] = []
 		for (let i = 0; i < count; i++) {
@@ -65,7 +65,7 @@ export class Rand {
 		return selection
 	}
 
-	/** shuffle an array in-place using (fisher-yates). */
+	/** randomly shuffle an array in-place using fisher-yates. */
 	shuffle<T>(array: T[]) {
 		for (let i = array.length - 1; i > 0; i--) {
 			const j = Math.floor(this.random() * (i + 1))
