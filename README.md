@@ -52,7 +52,6 @@
 
 ### 🍏 Scalar
 ### 🍏 Circular
-### 🍏 Randy
 ### 🍏 Noise
 ### 🍏 Spline
 ### 🍏 Angles

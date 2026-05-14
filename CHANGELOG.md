@@ -8,14 +8,16 @@
 
 <br/>
 
-## v0.3
+## v0.4
 
-### v0.3.5
-- 🔶 deprecate `Randy` in favor of new `Rand`
-- 🍏 add `Rand` class
-- 🍏 add `seed` fn
-- 🍏 add `cryptoRandom` fn
-- 🍏 add `u32ify` fn
+### v0.4.0
+- 🟥 delete `Randy` class in favor of `Rand` that now lives in `@e280/stz` library
+
+
+
+<br/>
+
+## v0.3
 
 ### v0.3.4
 - 🍏 improve rect ergos
